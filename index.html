@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Daily News</title>
+<title>Claude Daily — Casos de Uso Practicos</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Georgia', serif; background: #0a0a0a; color: #f0f0f0; }
@@ -13,84 +13,258 @@ header { background: #111; border-bottom: 3px solid #e63946; padding: 20px 40px;
 .date { color: #888; font-size: 14px; font-style: italic; }
 .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 60px 40px; text-align: center; }
 .hero h2 { font-size: 13px; letter-spacing: 4px; color: #e63946; text-transform: uppercase; margin-bottom: 16px; }
-.hero h1 { font-size: 38px; font-weight: bold; line-height: 1.25; max-width: 720px; margin: 0 auto 20px; }
-.hero p { color: #aaa; font-size: 18px; max-width: 620px; margin: 0 auto; line-height: 1.6; }
+.hero h1 { font-size: 38px; font-weight: bold; line-height: 1.25; max-width: 760px; margin: 0 auto 20px; }
+.hero p { color: #aaa; font-size: 17px; max-width: 620px; margin: 0 auto; line-height: 1.6; }
 .container { max-width: 1200px; margin: 0 auto; padding: 50px 40px; }
 .section-title { font-size: 11px; letter-spacing: 3px; color: #e63946; text-transform: uppercase; margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid #2a2a2a; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px; }
-.card { background: #111; border: 1px solid #222; border-radius: 10px; overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
-.card:hover { transform: translateY(-5px); border-color: #e63946; box-shadow: 0 12px 30px rgba(230,57,70,0.15); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px; }
+.card { background: #111; border: 1px solid #222; border-radius: 10px; overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; }
+.card:hover { transform: translateY(-5px); border-color: #e63946; box-shadow: 0 12px 30px rgba(230,57,70,0.12); }
 .card-badge { background: #e63946; color: white; font-size: 10px; font-family: Arial, sans-serif; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; display: inline-block; }
-.card-body { padding: 26px; }
-.card-title { font-size: 21px; font-weight: bold; margin: 14px 0 10px; line-height: 1.3; color: #f5f5f5; }
-.card-summary { color: #999; font-size: 14px; line-height: 1.65; margin-bottom: 18px; border-bottom: 1px solid #1e1e1e; padding-bottom: 16px; }
-.card-text { color: #ccc; font-size: 14px; line-height: 1.85; }
+.card-body { padding: 26px; flex: 1; display: flex; flex-direction: column; }
+.card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; margin-top: 4px; }
+.avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif; flex-shrink: 0; }
+.author-info { display: flex; flex-direction: column; }
+.author-name { font-size: 13px; font-family: Arial, sans-serif; color: #ddd; font-weight: 600; }
+.author-role { font-size: 11px; font-family: Arial, sans-serif; color: #666; }
+.card-title { font-size: 20px; font-weight: bold; margin-bottom: 10px; line-height: 1.3; color: #f5f5f5; }
+.card-summary { color: #999; font-size: 14px; line-height: 1.65; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid #1e1e1e; }
+.card-text { color: #ccc; font-size: 14px; line-height: 1.85; flex: 1; }
 .card-text p { margin-bottom: 14px; }
-.card-quote { border-left: 3px solid #e63946; padding: 10px 16px; margin: 18px 0; color: #e0d0d0; font-style: italic; background: rgba(230,57,70,0.05); border-radius: 0 4px 4px 0; }
-.breaking { background: #e63946; color: white; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; display: inline-block; margin-bottom: 10px; font-family: Arial, sans-serif; }
+.tutorial-title { font-size: 11px; letter-spacing: 2px; color: #e63946; text-transform: uppercase; font-family: Arial, sans-serif; margin: 20px 0 12px; padding-top: 18px; border-top: 1px solid #1e1e1e; }
+.step { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
+.step-num { background: #e63946; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; font-family: Arial, sans-serif; flex-shrink: 0; margin-top: 1px; }
+.step-content { font-size: 13px; color: #bbb; line-height: 1.7; }
+.step-content strong { color: #f0f0f0; display: block; margin-bottom: 3px; font-family: Arial, sans-serif; }
+.code-block { background: #0d0d0d; border: 1px solid #2a2a2a; border-left: 3px solid #e63946; padding: 14px 16px; border-radius: 0 6px 6px 0; margin: 14px 0; font-family: 'Courier New', monospace; font-size: 12px; color: #a8d8a8; line-height: 1.7; overflow-x: auto; }
+.tip { background: rgba(230,57,70,0.07); border: 1px solid rgba(230,57,70,0.2); border-radius: 6px; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #ccc; line-height: 1.6; }
+.tip strong { color: #e63946; font-family: Arial, sans-serif; }
+.read-time { font-size: 11px; color: #555; font-family: Arial, sans-serif; margin-top: auto; padding-top: 16px; }
 footer { background: #0d0d0d; border-top: 1px solid #1e1e1e; padding: 35px 40px; text-align: center; color: #444; font-size: 13px; margin-top: 60px; font-family: Arial, sans-serif; }
 footer a { color: #e63946; text-decoration: none; }
-footer a:hover { text-decoration: underline; }
 @media (max-width: 600px) { .hero h1 { font-size: 26px; } header { padding: 16px 20px; } .container { padding: 30px 20px; } }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">CLAUDE <span>DAILY</span> NEWS</div>
+  <div class="logo">CLAUDE <span>DAILY</span></div>
   <div class="date">16 DE ABRIL, 2026</div>
 </header>
 
 <div class="hero">
-  <div class="breaking">Ultima hora</div>
-  <h2>Inteligencia Artificial &middot; Anthropic</h2>
-  <h1>Anthropic Redisena Claude Code con Sesiones Paralelas y Lanza las "Routines"</h1>
-  <p>La nueva app de escritorio permite ejecutar automatizaciones en la nube de Anthropic, incluso con la computadora apagada.</p>
+  <h2>Tutoriales &middot; Casos de Uso Practicos</h2>
+  <h1>Lo que la gente esta logrando con IA hoy</h1>
+  <p>Guias paso a paso escritas por usuarios reales sobre como integrar IA en su trabajo diario.</p>
 </div>
 
 <div class="container">
-  <div class="section-title">Ultimas Noticias &mdash; Abril 2026</div>
+  <div class="section-title">Tutoriales de esta semana</div>
   <div class="grid">
 
+    <!-- ARTICULO 1 -->
     <div class="card">
-      <div class="card-badge">Producto</div>
+      <div class="card-badge">Finanzas Personales</div>
       <div class="card-body">
-        <div class="card-title">Claude Code Estrena Diseno Total y Automatizaciones en la Nube</div>
-        <div class="card-summary">Anthropic lanza una nueva version de su app de escritorio con soporte para sesiones paralelas y un sistema de rutinas que corre en sus servidores las 24 horas.</div>
-        <div class="card-text">
-          <p>El 14 de abril de 2026, Anthropic presentó la mayor actualización hasta la fecha de Claude Code, su herramienta de programación asistida por IA para Mac y Windows. La nueva versión introduce un rediseño completo de la interfaz que permite gestionar múltiples sesiones de trabajo en simultáneo desde una barra lateral, algo que los desarrolladores venían pidiendo hace meses.</p>
-          <p>Pero la novedad más llamativa es "Routines" (Rutinas), una funcionalidad en investigación preliminar que permite guardar configuraciones completas de trabajo —incluyendo un prompt, repositorios conectados y herramientas externas— y ejecutarlas automáticamente en la infraestructura cloud de Anthropic. A diferencia de las automatizaciones locales, las rutinas siguen corriendo aunque el usuario apague su laptop.</p>
-          <div class="card-quote">"Una rutina es una configuración guardada de Claude Code con un prompt, repositorios y conectores que se ejecutan automáticamente en nuestra infraestructura cloud." — Anthropic</div>
-          <p>La característica compite directamente con herramientas de CI/CD y agentes de automatización como GitHub Actions, aunque con la ventaja de estar integrada nativamente en el flujo de trabajo de Claude. VentureBeat calificó el lanzamiento como "un paso significativo hacia el desarrollo de software completamente autónomo".</p>
+        <div class="card-meta">
+          <div class="avatar" style="background:#2d4a6e;">SO</div>
+          <div class="author-info">
+            <span class="author-name">Sofia Ormachea</span>
+            <span class="author-role">Contadora &middot; Buenos Aires</span>
+          </div>
         </div>
+        <div class="card-title">Analice 6 meses de gastos en 10 minutos con IA</div>
+        <div class="card-summary">Exporté mis movimientos bancarios, los pasé por Claude y obtuve un resumen por categorías, alertas de gastos inusuales y proyecciones para el mes siguiente. Así lo hice.</div>
+        <div class="card-text">
+          <p>Llevaba meses queriendo entender a donde se iba mi plata. Tenía los extractos del banco en PDF pero nunca me ponía a analizarlos. Un domingo a la tarde decidí probarlo con IA y el resultado me sorprendió.</p>
+          <p>El proceso completo me llevó menos de 15 minutos, incluyendo el tiempo de exportar los archivos. Lo que más me gustó fue que no solo me dio números sino que me explicó patrones: "tus gastos en delivery aumentaron 40% en marzo" o "hay tres suscripciones que no reconocés fácilmente por el nombre".</p>
+
+          <div class="tutorial-title">Como hacerlo paso a paso</div>
+
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Exportá tus movimientos</strong>
+              Desde el home banking bajá el extracto de los últimos 3-6 meses en formato CSV o Excel. La mayoría de los bancos lo tiene en "Descargar movimientos" o similar.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Subí el archivo y escribí este prompt</strong>
+              Adjuntá el CSV directamente en el chat y usá este mensaje:
+            </div>
+          </div>
+
+          <div class="code-block">Analizá estos movimientos bancarios. Necesito:
+1. Categorías de gastos (comida, transporte, suscripciones, etc.)
+2. Top 5 de donde más gasto
+3. Comparación por mes
+4. Gastos que parecen inusuales o duplicados
+5. Proyección aproximada del próximo mes
+
+Presentá todo de forma clara, sin tecnicismos.</div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Pedí el desglose por categoría</strong>
+              Después del primer análisis, preguntá específicamente por lo que más te llama la atención: "¿Cuánto gasté en suscripciones? ¿Cuáles son?"
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <strong>Pedí un presupuesto sugerido</strong>
+              Con los datos en contexto, escribí: "En base a mis gastos históricos, armame un presupuesto realista para el próximo mes con un objetivo de ahorro del 15%."
+            </div>
+          </div>
+
+          <div class="tip"><strong>Tip de privacidad:</strong> Si querés mayor privacidad, reemplazá los nombres de comercios por categorías antes de subir el archivo. El análisis funciona igual.</div>
+
+          <p>El resultado fue un Google Doc completo con gráficos de torta, tabla de categorías y tres recomendaciones concretas. Lo que antes me llevaba un fin de semana, ahora son 10 minutos.</p>
+        </div>
+        <div class="read-time">5 min de lectura &middot; Nivel: principiante</div>
       </div>
     </div>
 
+    <!-- ARTICULO 2 -->
     <div class="card">
-      <div class="card-badge">Investigacion</div>
+      <div class="card-badge">Desarrollo Web</div>
       <div class="card-body">
-        <div class="card-title">Anthropic Presenta Claude Mythos: Un Modelo Especializado en Ciberseguridad</div>
-        <div class="card-summary">El nuevo modelo de uso general destaca por sus capacidades en seguridad informática y fue lanzado junto al Proyecto Glasswing para proteger software critico.</div>
-        <div class="card-text">
-          <p>A principios de abril, Anthropic presentó Claude Mythos Preview a través de su plataforma de investigación red.anthropic.com. El modelo está diseñado como un LLM de uso general pero con capacidades particularmente destacadas en tareas de seguridad informática, incluyendo análisis de vulnerabilidades, auditoría de código y detección de amenazas.</p>
-          <p>Junto al modelo, Anthropic anunció el Proyecto Glasswing: una iniciativa para usar Mythos Preview en la securización de software crítico. El nombre hace referencia a la mariposa de alas transparentes, conocida por su capacidad de pasar desapercibida —una metáfora de la detección silenciosa de amenazas digitales.</p>
-          <div class="card-quote">"Mythos Preview performa fuerte a través de todas las áreas pero es especialmente capaz en tareas de seguridad informática." — Anthropic Red Team</div>
-          <p>El lanzamiento marca un giro estratégico: por primera vez Anthropic lanza un modelo pensado específicamente para el mercado de ciberseguridad, un sector donde competidores como OpenAI y Google también están posicionándose con fuerza en 2026.</p>
+        <div class="card-meta">
+          <div class="avatar" style="background:#2d6e4a;">LV</div>
+          <div class="author-info">
+            <span class="author-name">Lucas Valderrama</span>
+            <span class="author-role">Diseñador UX &middot; Medellin</span>
+          </div>
         </div>
+        <div class="card-title">Arme mi portfolio profesional desde cero sin saber programar</div>
+        <div class="card-summary">Soy diseñador, no programador. Usando IA como co-piloto construí un sitio web completo en una tarde, con animaciones y formulario de contacto funcional.</div>
+        <div class="card-text">
+          <p>Siempre tuve excusas para no tener portfolio propio: no sé HTML, no sé hostear, no tengo tiempo. En un sábado libre decidí que era ahora o nunca, y con IA como copiloto lo terminé antes de la cena.</p>
+          <p>La clave es no pedirle que "haga todo solo" sino trabajar en iteraciones cortas. Primero la estructura, después el diseño, después cada sección. Así mantenés el control sin necesitar conocimiento técnico.</p>
+
+          <div class="tutorial-title">El proceso que use</div>
+
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Definí la estructura primero</strong>
+              Antes de pedir código, describí en palabras lo que quería: "Necesito un portfolio con: header con mi nombre y foto, sección de proyectos en grilla, sobre mí y formulario de contacto."
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Pedí el HTML base con este prompt</strong>
+            </div>
+          </div>
+
+          <div class="code-block">Crea un portfolio web en un solo archivo HTML+CSS+JS.
+Estilo: minimalista, oscuro, tipografía moderna.
+Secciones: hero con nombre y tagline, proyectos en grid 3 columnas con hover effect, about con foto placeholder, contacto con formulario.
+Que sea responsive y se vea bien en celular.
+No uses frameworks externos, solo vanilla CSS.</div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Iterá por partes</strong>
+              Una vez que tuve el esqueleto, fui ajustando sección por sección: "Cambiá los colores a esta paleta: #0a0a0a, #e63946, #f0f0f0" o "Agregá una animación de entrada al hacer scroll en los proyectos".
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <strong>Subilo gratis con GitHub Pages</strong>
+              Creá una cuenta en github.com, subí el archivo index.html a un repositorio nuevo y activá Pages en Settings. Tu URL queda lista en minutos.
+            </div>
+          </div>
+
+          <div class="tip"><strong>Pro tip:</strong> Pedile que genere el HTML con comentarios explicando cada sección. Así podés editarlo vos mismo después sin perderte.</div>
+
+          <p>Mi portfolio hoy tiene más visitas que los de compañeros que contrataron a un desarrollador. Y si quiero cambiar algo, en 2 minutos está listo.</p>
+        </div>
+        <div class="read-time">7 min de lectura &middot; Nivel: principiante</div>
       </div>
     </div>
 
+    <!-- ARTICULO 3 -->
     <div class="card">
-      <div class="card-badge">Empresa</div>
+      <div class="card-badge">Productividad</div>
       <div class="card-body">
-        <div class="card-title">Usuarios Denuncian Caida en la Calidad de Claude y Anthropic Enfrenta Criticas</div>
-        <div class="card-summary">Una ola de quejas de usuarios frecuentes señala una reduccion en el rendimiento de los modelos, vinculada a ajustes internos para ahorrar capacidad de computo.</div>
-        <div class="card-text">
-          <p>Mientras Anthropic celebra sus lanzamientos técnicos, enfrenta una tormenta de críticas de sus usuarios más activos. Según un informe de Fortune publicado el 14 de abril, numerosos usuarios de pago reportan que Claude "ya no es tan inteligente como antes", con respuestas más cortas, menos detalladas y con mayor tendencia a declinar tareas complejas.</p>
-          <p>La explicación apunta a cambios internos que Anthropic habría realizado para reducir el nivel de "esfuerzo" por defecto de los modelos, optimizando el uso de tokens procesados en un contexto de alta demanda y restricciones de capacidad computacional. La empresa no ha confirmado oficialmente estos cambios.</p>
-          <div class="card-quote">"Los cambios parecen estar conectados a una reducción del esfuerzo por defecto del modelo para economizar en el procesamiento de tokens." — Fortune</div>
-          <p>La situación se agravó el 15 de abril cuando Claude sufrió una interrupción del servicio de casi tres horas, afectando Claude.ai, la API y Claude Code. Anthropic confirmó el incidente a las 10:53 AM ET y reportó su resolución a la 1:42 PM ET. La combinación de ambos eventos generó un debate en la comunidad tech sobre la fiabilidad y transparencia de la compañía.</p>
+        <div class="card-meta">
+          <div class="avatar" style="background:#6e4a2d;">MR</div>
+          <div class="author-info">
+            <span class="author-name">Mariana Rios</span>
+            <span class="author-role">Project Manager &middot; Ciudad de Mexico</span>
+          </div>
         </div>
+        <div class="card-title">Como uso IA para preparar y resumir reuniones en menos de 5 minutos</div>
+        <div class="card-summary">Antes tardaba una hora preparando cada reunión importante. Ahora tengo un sistema de prompts que me da agenda, preguntas clave y resumen en minutos.</div>
+        <div class="card-text">
+          <p>Como PM tengo entre 4 y 6 reuniones por día. La preparación me consumía horas cada semana: revisar contexto, armar agenda, preparar preguntas, tomar notas y escribir el follow-up. Ahora tengo un sistema que me lleva 5 minutos en total.</p>
+          <p>El truco está en tener prompts guardados y reusables. No improviso cada vez: tengo tres plantillas que adapto según el tipo de reunión.</p>
+
+          <div class="tutorial-title">Mis 3 prompts que uso cada dia</div>
+
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Prompt de preparacion (antes de la reunion)</strong>
+              Pegá el contexto relevante (emails, documentos, notas previas) y usá esto:
+            </div>
+          </div>
+
+          <div class="code-block">Tengo una reunion en 30 minutos con [nombre/rol].
+Contexto: [pegar emails o notas relevantes]
+Objetivo de la reunion: [describir en 1 linea]
+
+Dame:
+- Agenda sugerida con tiempos (reunion de X minutos)
+- 5 preguntas clave que debo hacer
+- Posibles objeciones y como responderlas
+- Que necesito tener listo antes de entrar</div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Prompt de resumen (despues de la reunion)</strong>
+              Grabá la reunión con cualquier app (Otter, Zoom, incluso el dictado del celular) y pegá la transcripción:
+            </div>
+          </div>
+
+          <div class="code-block">Esta es la transcripcion de mi reunion de hoy:
+[pegar transcripcion]
+
+Necesito:
+- Resumen ejecutivo en 3 puntos
+- Decisiones tomadas
+- Action items con responsable y fecha
+- Temas que quedaron pendientes para proxima reunion
+Formato: lista clara, sin texto de relleno.</div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Prompt de follow-up (email post-reunion)</strong>
+            </div>
+          </div>
+
+          <div class="code-block">En base a este resumen de reunion, escribi un email de follow-up profesional para enviar a los participantes.
+Debe incluir: agradecimiento breve, decisiones clave, proximos pasos con fechas y responsables.
+Tono: formal pero directo. Maximo 200 palabras.</div>
+
+          <div class="tip"><strong>Tip de flujo:</strong> Guardá estos prompts en una nota o doc. Copiar y pegar tarda 30 segundos. En una semana recuperás horas.</div>
+
+          <p>Desde que implementé este sistema, mis reuniones tienen mejor seguimiento y los action items se cumplen más. Mi jefe me preguntó qué había cambiado.</p>
+        </div>
+        <div class="read-time">6 min de lectura &middot; Nivel: principiante</div>
       </div>
     </div>
 
@@ -98,7 +272,7 @@ footer a:hover { text-decoration: underline; }
 </div>
 
 <footer>
-  <p>Claude Daily News &nbsp;&middot;&nbsp; Actualizado automaticamente cada dia &nbsp;&middot;&nbsp; <a href="https://www.anthropic.com" target="_blank">anthropic.com</a></p>
+  <p>Claude Daily &nbsp;&middot;&nbsp; Tutoriales practicos cada dia &nbsp;&middot;&nbsp; <a href="https://www.anthropic.com" target="_blank">anthropic.com</a></p>
 </footer>
 
 </body>
