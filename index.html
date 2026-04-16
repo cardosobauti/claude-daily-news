@@ -5,62 +5,101 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claude Daily News</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Georgia',serif;background:#f4f1eb;color:#1a1a1a}
-header{background:#0a0a0a;color:white;padding:20px 0;border-bottom:4px solid #e63946}
-.header-inner{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:2.2rem;font-weight:900;letter-spacing:-1px}
-.logo span{color:#e63946}
-.tagline{font-size:.85rem;color:#aaa;font-style:italic;margin-top:4px}
-.dateline{font-size:.8rem;color:#888;text-align:right}
-nav{background:#1a1a1a;padding:10px 0}
-nav .inner{max-width:1100px;margin:0 auto;padding:0 20px;font-size:.85rem;color:#ccc}
-main{max-width:1100px;margin:40px auto;padding:0 20px}
-.section-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#e63946;border-bottom:2px solid #e63946;padding-bottom:6px;margin-bottom:24px}
-.articles-grid{display:grid;grid-template-columns:2fr 1fr;gap:32px}
-.featured{border-right:1px solid #ddd;padding-right:32px}
-.featured article,.sidebar article{margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid #ddd}
-.tag{display:inline-block;background:#e63946;color:white;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;margin-bottom:10px}
-h2{font-size:1.6rem;line-height:1.3;margin-bottom:10px;color:#0a0a0a}
-h3{font-size:1.1rem;line-height:1.3;margin-bottom:8px;color:#0a0a0a}
-.summary{font-size:.95rem;line-height:1.7;color:#444;margin-bottom:12px}
-.meta{font-size:.78rem;color:#888}
-.article-body{font-size:1.05rem;line-height:1.9;color:#333}
-.article-body p{margin-bottom:16px}
-footer{background:#0a0a0a;color:#888;text-align:center;padding:24px;margin-top:60px;font-size:.8rem}
-.empty-state{text-align:center;padding:80px 20px;color:#888}
-.empty-state h2{font-size:1.4rem;margin-bottom:12px;color:#444}
-@media(max-width:768px){.articles-grid{grid-template-columns:1fr}.featured{border-right:none;padding-right:0}}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Georgia', serif; background: #0a0a0a; color: #f0f0f0; }
+header { background: #111; border-bottom: 3px solid #e63946; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; color: #fff; }
+.logo span { color: #e63946; }
+.date { color: #888; font-size: 14px; font-style: italic; }
+.hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 60px 40px; text-align: center; }
+.hero h2 { font-size: 13px; letter-spacing: 4px; color: #e63946; text-transform: uppercase; margin-bottom: 16px; }
+.hero h1 { font-size: 38px; font-weight: bold; line-height: 1.25; max-width: 720px; margin: 0 auto 20px; }
+.hero p { color: #aaa; font-size: 18px; max-width: 620px; margin: 0 auto; line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 50px 40px; }
+.section-title { font-size: 11px; letter-spacing: 3px; color: #e63946; text-transform: uppercase; margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid #2a2a2a; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px; }
+.card { background: #111; border: 1px solid #222; border-radius: 10px; overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+.card:hover { transform: translateY(-5px); border-color: #e63946; box-shadow: 0 12px 30px rgba(230,57,70,0.15); }
+.card-badge { background: #e63946; color: white; font-size: 10px; font-family: Arial, sans-serif; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; display: inline-block; }
+.card-body { padding: 26px; }
+.card-title { font-size: 21px; font-weight: bold; margin: 14px 0 10px; line-height: 1.3; color: #f5f5f5; }
+.card-summary { color: #999; font-size: 14px; line-height: 1.65; margin-bottom: 18px; border-bottom: 1px solid #1e1e1e; padding-bottom: 16px; }
+.card-text { color: #ccc; font-size: 14px; line-height: 1.85; }
+.card-text p { margin-bottom: 14px; }
+.card-quote { border-left: 3px solid #e63946; padding: 10px 16px; margin: 18px 0; color: #e0d0d0; font-style: italic; background: rgba(230,57,70,0.05); border-radius: 0 4px 4px 0; }
+.breaking { background: #e63946; color: white; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; display: inline-block; margin-bottom: 10px; font-family: Arial, sans-serif; }
+footer { background: #0d0d0d; border-top: 1px solid #1e1e1e; padding: 35px 40px; text-align: center; color: #444; font-size: 13px; margin-top: 60px; font-family: Arial, sans-serif; }
+footer a { color: #e63946; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+@media (max-width: 600px) { .hero h1 { font-size: 26px; } header { padding: 16px 20px; } .container { padding: 30px 20px; } }
 </style>
 </head>
 <body>
+
 <header>
-<div class="header-inner">
-<div>
-<div class="logo">Claude<span>Daily</span>News</div>
-<div class="tagline">Noticias, usos y tendencias sobre Claude AI — actualizadas cada día</div>
-</div>
-<div class="dateline" id="dateline"></div>
-</div>
+  <div class="logo">CLAUDE <span>DAILY</span> NEWS</div>
+  <div class="date">16 DE ABRIL, 2026</div>
 </header>
-<nav><div class="inner">📰 Novedades &nbsp;|&nbsp; 💡 Casos de uso &nbsp;|&nbsp; 🛠️ Herramientas &nbsp;|&nbsp; 🤖 Análisis</div></nav>
-<main>
-<div class="section-title">Edición del día</div>
-<div id="articles-container">
-<div class="empty-state">
-<h2>🚀 Claude Daily News está en línea</h2>
-<p>Los primeros artículos aparecerán mañana a las 8:00 AM, generados automáticamente por Claude AI.</p>
-<p style="margin-top:12px;font-size:.85rem">Seguí <a href="https://github.com/cardosobauti/claude-daily-news" style="color:#e63946">este repositorio</a> para ver cómo funciona.</p>
+
+<div class="hero">
+  <div class="breaking">Ultima hora</div>
+  <h2>Inteligencia Artificial &middot; Anthropic</h2>
+  <h1>Anthropic Redisena Claude Code con Sesiones Paralelas y Lanza las "Routines"</h1>
+  <p>La nueva app de escritorio permite ejecutar automatizaciones en la nube de Anthropic, incluso con la computadora apagada.</p>
 </div>
+
+<div class="container">
+  <div class="section-title">Ultimas Noticias &mdash; Abril 2026</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-badge">Producto</div>
+      <div class="card-body">
+        <div class="card-title">Claude Code Estrena Diseno Total y Automatizaciones en la Nube</div>
+        <div class="card-summary">Anthropic lanza una nueva version de su app de escritorio con soporte para sesiones paralelas y un sistema de rutinas que corre en sus servidores las 24 horas.</div>
+        <div class="card-text">
+          <p>El 14 de abril de 2026, Anthropic presentó la mayor actualización hasta la fecha de Claude Code, su herramienta de programación asistida por IA para Mac y Windows. La nueva versión introduce un rediseño completo de la interfaz que permite gestionar múltiples sesiones de trabajo en simultáneo desde una barra lateral, algo que los desarrolladores venían pidiendo hace meses.</p>
+          <p>Pero la novedad más llamativa es "Routines" (Rutinas), una funcionalidad en investigación preliminar que permite guardar configuraciones completas de trabajo —incluyendo un prompt, repositorios conectados y herramientas externas— y ejecutarlas automáticamente en la infraestructura cloud de Anthropic. A diferencia de las automatizaciones locales, las rutinas siguen corriendo aunque el usuario apague su laptop.</p>
+          <div class="card-quote">"Una rutina es una configuración guardada de Claude Code con un prompt, repositorios y conectores que se ejecutan automáticamente en nuestra infraestructura cloud." — Anthropic</div>
+          <p>La característica compite directamente con herramientas de CI/CD y agentes de automatización como GitHub Actions, aunque con la ventaja de estar integrada nativamente en el flujo de trabajo de Claude. VentureBeat calificó el lanzamiento como "un paso significativo hacia el desarrollo de software completamente autónomo".</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge">Investigacion</div>
+      <div class="card-body">
+        <div class="card-title">Anthropic Presenta Claude Mythos: Un Modelo Especializado en Ciberseguridad</div>
+        <div class="card-summary">El nuevo modelo de uso general destaca por sus capacidades en seguridad informática y fue lanzado junto al Proyecto Glasswing para proteger software critico.</div>
+        <div class="card-text">
+          <p>A principios de abril, Anthropic presentó Claude Mythos Preview a través de su plataforma de investigación red.anthropic.com. El modelo está diseñado como un LLM de uso general pero con capacidades particularmente destacadas en tareas de seguridad informática, incluyendo análisis de vulnerabilidades, auditoría de código y detección de amenazas.</p>
+          <p>Junto al modelo, Anthropic anunció el Proyecto Glasswing: una iniciativa para usar Mythos Preview en la securización de software crítico. El nombre hace referencia a la mariposa de alas transparentes, conocida por su capacidad de pasar desapercibida —una metáfora de la detección silenciosa de amenazas digitales.</p>
+          <div class="card-quote">"Mythos Preview performa fuerte a través de todas las áreas pero es especialmente capaz en tareas de seguridad informática." — Anthropic Red Team</div>
+          <p>El lanzamiento marca un giro estratégico: por primera vez Anthropic lanza un modelo pensado específicamente para el mercado de ciberseguridad, un sector donde competidores como OpenAI y Google también están posicionándose con fuerza en 2026.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-badge">Empresa</div>
+      <div class="card-body">
+        <div class="card-title">Usuarios Denuncian Caida en la Calidad de Claude y Anthropic Enfrenta Criticas</div>
+        <div class="card-summary">Una ola de quejas de usuarios frecuentes señala una reduccion en el rendimiento de los modelos, vinculada a ajustes internos para ahorrar capacidad de computo.</div>
+        <div class="card-text">
+          <p>Mientras Anthropic celebra sus lanzamientos técnicos, enfrenta una tormenta de críticas de sus usuarios más activos. Según un informe de Fortune publicado el 14 de abril, numerosos usuarios de pago reportan que Claude "ya no es tan inteligente como antes", con respuestas más cortas, menos detalladas y con mayor tendencia a declinar tareas complejas.</p>
+          <p>La explicación apunta a cambios internos que Anthropic habría realizado para reducir el nivel de "esfuerzo" por defecto de los modelos, optimizando el uso de tokens procesados en un contexto de alta demanda y restricciones de capacidad computacional. La empresa no ha confirmado oficialmente estos cambios.</p>
+          <div class="card-quote">"Los cambios parecen estar conectados a una reducción del esfuerzo por defecto del modelo para economizar en el procesamiento de tokens." — Fortune</div>
+          <p>La situación se agravó el 15 de abril cuando Claude sufrió una interrupción del servicio de casi tres horas, afectando Claude.ai, la API y Claude Code. Anthropic confirmó el incidente a las 10:53 AM ET y reportó su resolución a la 1:42 PM ET. La combinación de ambos eventos generó un debate en la comunidad tech sobre la fiabilidad y transparencia de la compañía.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
-</main>
+
 <footer>
-<p>© Claude Daily News — Contenido generado automáticamente por Claude AI (Anthropic)</p>
-<p style="margin-top:6px">Actualizado diariamente · cardosobauti</p>
+  <p>Claude Daily News &nbsp;&middot;&nbsp; Actualizado automaticamente cada dia &nbsp;&middot;&nbsp; <a href="https://www.anthropic.com" target="_blank">anthropic.com</a></p>
 </footer>
-<script>
-const d=new Date();
-document.getElementById('dateline').textContent=d.toLocaleDateString('es-AR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-</script>
+
 </body>
 </html>
