@@ -3,448 +3,650 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Daily — Tutoriales de IA</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Claude Daily</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-primary: #131722;
-  --bg-secondary: #1e222d;
-  --bg-tertiary: #2a2e39;
-  --bg-hover: #2a2e39;
+  --bg: #131722;
+  --bg2: #1e222d;
+  --bg3: #2a2e39;
   --border: #2a2e39;
-  --border-light: #363a45;
+  --border2: #363a45;
   --accent: #2962ff;
-  --accent-hover: #1e53e5;
-  --text-primary: #d1d4dc;
-  --text-secondary: #787b86;
-  --text-bright: #ffffff;
+  --accent2: #1e53e5;
+  --text: #d1d4dc;
+  --text2: #787b86;
+  --bright: #ffffff;
   --green: #26a69a;
-  --red: #ef5350;
   --tag-bg: rgba(41,98,255,0.12);
   --tag-color: #5b9cf6;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 13px; line-height: 1.5; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color:var(--text); font-size:13px; line-height:1.5; }
 
-/* TOPBAR */
-.topbar { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 0 20px; height: 46px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-.topbar-left { display: flex; align-items: center; gap: 24px; }
-.logo { font-size: 15px; font-weight: 700; color: var(--text-bright); letter-spacing: -0.3px; white-space: nowrap; }
-.logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 2px; }
-.nav-link { padding: 6px 12px; border-radius: 4px; color: var(--text-secondary); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-decoration: none; }
-.nav-link:hover { color: var(--text-primary); background: var(--bg-hover); }
-.nav-link.active { color: var(--text-bright); background: var(--bg-tertiary); }
-.topbar-right { display: flex; align-items: center; gap: 12px; }
-.date-badge { font-size: 11px; color: var(--text-secondary); background: var(--bg-tertiary); padding: 4px 10px; border-radius: 4px; }
+/* ── TOPBAR ── */
+.topbar { background:var(--bg2); border-bottom:1px solid var(--border); height:48px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; position:sticky; top:0; z-index:200; }
+.logo { font-family:'Playfair Display',serif; font-size:22px; font-weight:800; color:var(--bright); cursor:pointer; letter-spacing:-0.5px; }
+.logo span { color:var(--accent); }
+.nav { display:flex; gap:2px; }
+.nav-btn { padding:6px 13px; border-radius:4px; color:var(--text2); font-size:12px; font-weight:500; cursor:pointer; transition:all .15s; border:none; background:none; }
+.nav-btn:hover { color:var(--text); background:var(--bg3); }
+.nav-btn.active { color:var(--bright); background:var(--bg3); }
+.topbar-right { display:flex; align-items:center; gap:10px; }
+.date-chip { font-size:11px; color:var(--text2); background:var(--bg3); padding:4px 10px; border-radius:4px; }
+.back-btn { display:none; align-items:center; gap:6px; font-size:12px; color:var(--accent); background:var(--tag-bg); border:none; padding:5px 12px; border-radius:4px; cursor:pointer; font-weight:500; }
+.back-btn:hover { background:rgba(41,98,255,0.2); }
+.back-btn.visible { display:flex; }
 
-/* MAIN LAYOUT */
-.layout { display: grid; grid-template-columns: 220px 1fr 280px; min-height: calc(100vh - 46px); }
+/* ── LAYOUT ── */
+.layout { display:grid; grid-template-columns:200px 1fr 260px; min-height:calc(100vh - 48px); }
+@media(max-width:900px){.layout{grid-template-columns:1fr;} .sidebar-l,.sidebar-r{display:none;}}
 
-/* SIDEBAR LEFT */
-.sidebar-left { border-right: 1px solid var(--border); padding: 16px 0; background: var(--bg-secondary); }
-.sidebar-section { margin-bottom: 4px; }
-.sidebar-label { font-size: 10px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px; padding: 8px 16px 4px; }
-.sidebar-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; cursor: pointer; color: var(--text-secondary); font-size: 13px; font-weight: 400; transition: all 0.15s; border-left: 2px solid transparent; }
-.sidebar-item:hover { color: var(--text-primary); background: var(--bg-hover); }
-.sidebar-item.active { color: var(--text-bright); background: rgba(41,98,255,0.08); border-left-color: var(--accent); font-weight: 500; }
-.sidebar-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+/* ── SIDEBARS ── */
+.sidebar-l { border-right:1px solid var(--border); background:var(--bg2); padding:16px 0; }
+.sidebar-r { border-left:1px solid var(--border); background:var(--bg2); }
+.sl-label { font-size:10px; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:.8px; padding:10px 16px 4px; }
+.sl-item { display:flex; align-items:center; gap:9px; padding:8px 16px; cursor:pointer; color:var(--text2); font-size:12px; transition:all .15s; border-left:2px solid transparent; }
+.sl-item:hover { color:var(--text); background:rgba(255,255,255,.02); }
+.sl-item.active { color:var(--bright); background:rgba(41,98,255,.08); border-left-color:var(--accent); font-weight:500; }
+.sl-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.widget { border-bottom:1px solid var(--border); padding:14px 16px; }
+.widget-title { font-size:10px; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:.8px; margin-bottom:12px; }
+.trend-item { display:flex; gap:10px; padding:8px 0; border-bottom:1px solid var(--border); cursor:pointer; }
+.trend-item:last-child { border:none; }
+.trend-num { font-size:16px; font-weight:700; color:var(--border2); width:18px; flex-shrink:0; line-height:1.3; }
+.trend-title { font-size:12px; color:var(--text); line-height:1.4; font-weight:500; }
+.trend-title:hover { color:var(--accent); }
+.trend-meta { font-size:10px; color:var(--text2); margin-top:2px; }
+.tag-cloud { display:flex; flex-wrap:wrap; gap:6px; }
+.tag-pill { background:var(--bg3); color:var(--text2); font-size:11px; padding:4px 10px; border-radius:12px; cursor:pointer; border:1px solid var(--border2); transition:all .15s; }
+.tag-pill:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+.stat-row { display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--border); }
+.stat-row:last-child { border:none; }
+.stat-l { font-size:12px; color:var(--text2); }
+.stat-v { font-size:12px; font-weight:600; }
 
-/* MAIN CONTENT */
-.main { padding: 0; overflow: hidden; }
-.main-header { padding: 16px 20px 0; border-bottom: 1px solid var(--border); }
-.main-title { font-size: 18px; font-weight: 600; color: var(--text-bright); margin-bottom: 14px; }
-.tabs { display: flex; gap: 0; }
-.tab { padding: 8px 16px; font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
-.tab:hover { color: var(--text-primary); }
-.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+/* ── HOME PAGE ── */
+#page-home { display:block; }
+#page-article { display:none; }
 
-/* ARTICLE LIST */
-.article-list { padding: 0; }
-.article-card { padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.12s; display: grid; grid-template-columns: 1fr auto; gap: 16px; }
-.article-card:hover { background: rgba(255,255,255,0.02); }
-.article-card.featured { grid-template-columns: 1fr; border-bottom: 1px solid var(--border); }
-.article-tag { display: inline-block; font-size: 10px; font-weight: 600; color: var(--tag-color); background: var(--tag-bg); padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 7px; }
-.article-title { font-size: 14px; font-weight: 600; color: var(--text-bright); line-height: 1.4; margin-bottom: 5px; }
-.article-title:hover { color: var(--accent); }
-.article-summary { font-size: 12px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 10px; }
-.article-meta { display: flex; align-items: center; gap: 10px; }
-.author-avatar { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: white; flex-shrink: 0; }
-.author-name { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
-.author-role { font-size: 11px; color: var(--text-secondary); }
-.dot-sep { color: var(--border-light); font-size: 10px; }
-.read-time { font-size: 11px; color: var(--text-secondary); }
+.home-inner { padding:0; }
+.home-tabs { display:flex; padding:0 20px; border-bottom:1px solid var(--border); background:var(--bg); }
+.h-tab { padding:10px 14px; font-size:12px; font-weight:500; color:var(--text2); cursor:pointer; border-bottom:2px solid transparent; transition:all .15s; }
+.h-tab:hover { color:var(--text); }
+.h-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
 
-/* EXPANDED ARTICLE */
-.article-expanded { padding: 20px; border-bottom: 1px solid var(--border); background: rgba(41,98,255,0.03); }
-.article-expanded .article-title { font-size: 17px; margin-bottom: 8px; }
-.article-expanded .article-summary { font-size: 13px; margin-bottom: 14px; }
-.article-body { font-size: 13px; color: var(--text-primary); line-height: 1.75; }
-.article-body p { margin-bottom: 13px; }
-.tutorial-header { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin: 18px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-.step-row { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
-.step-n { background: var(--accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
-.step-text { font-size: 12px; color: var(--text-primary); line-height: 1.65; }
-.step-text strong { color: var(--text-bright); display: block; font-size: 12px; margin-bottom: 3px; font-weight: 600; }
-.code-box { background: #0d1117; border: 1px solid var(--border); border-left: 2px solid var(--accent); padding: 12px 14px; border-radius: 0 4px 4px 0; font-family: 'Courier New', monospace; font-size: 11px; color: #7ec8a4; line-height: 1.65; margin: 10px 0; overflow-x: auto; white-space: pre-wrap; }
-.tip-box { background: rgba(41,98,255,0.07); border: 1px solid rgba(41,98,255,0.2); border-radius: 4px; padding: 10px 14px; font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin: 12px 0; }
-.tip-box strong { color: var(--accent); }
+/* FEATURED (hero) */
+.featured { padding:20px; border-bottom:1px solid var(--border); cursor:pointer; transition:background .15s; }
+.featured:hover { background:rgba(255,255,255,.015); }
+.feat-tag { display:inline-block; font-size:10px; font-weight:700; color:var(--tag-color); background:var(--tag-bg); padding:2px 8px; border-radius:3px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px; }
+.feat-eyebrow { font-size:10px; color:var(--text2); text-transform:uppercase; letter-spacing:.8px; margin-bottom:6px; font-weight:600; }
+.feat-title { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--bright); line-height:1.25; margin-bottom:10px; }
+.feat-title:hover { color:var(--accent); }
+.feat-excerpt { font-size:14px; color:var(--text2); line-height:1.65; margin-bottom:14px; max-width:680px; }
+.feat-meta { display:flex; align-items:center; gap:8px; }
+.avatar { border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; flex-shrink:0; }
+.author-name { font-size:12px; color:var(--text); font-weight:500; }
+.sep { color:var(--border2); }
+.read-time { font-size:11px; color:var(--text2); }
+.feat-cta { font-size:12px; color:var(--accent); font-weight:600; margin-top:10px; display:inline-flex; align-items:center; gap:4px; }
+.feat-cta::after { content:'→'; }
 
-/* SIDEBAR RIGHT */
-.sidebar-right { border-left: 1px solid var(--border); padding: 0; background: var(--bg-secondary); }
-.widget { border-bottom: 1px solid var(--border); padding: 14px 16px; }
-.widget-title { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
-.trending-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border); }
-.trending-item:last-child { border-bottom: none; }
-.trending-num { font-size: 16px; font-weight: 700; color: var(--border-light); width: 20px; flex-shrink: 0; line-height: 1.3; }
-.trending-title { font-size: 12px; color: var(--text-primary); line-height: 1.4; font-weight: 500; }
-.trending-title:hover { color: var(--accent); cursor: pointer; }
-.trending-meta { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
-.stat-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); }
-.stat-row:last-child { border-bottom: none; }
-.stat-label { font-size: 12px; color: var(--text-secondary); }
-.stat-val { font-size: 12px; font-weight: 600; color: var(--green); }
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
-.tag-pill { background: var(--bg-tertiary); color: var(--text-secondary); font-size: 11px; padding: 4px 10px; border-radius: 12px; cursor: pointer; border: 1px solid var(--border-light); transition: all 0.15s; }
-.tag-pill:hover { background: var(--accent); color: white; border-color: var(--accent); }
+/* ARTICLE GRID */
+.section-header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px 10px; border-bottom:1px solid var(--border); }
+.section-label { font-size:11px; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:.8px; }
+.section-more { font-size:11px; color:var(--accent); cursor:pointer; }
 
-@media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar-left, .sidebar-right { display: none; }
-}
+.article-grid { padding:16px 20px; display:grid; grid-template-columns:1fr 1fr; gap:0; }
+.article-card-home { padding:14px; border:1px solid var(--border); border-radius:6px; margin:6px; cursor:pointer; transition:all .15s; background:var(--bg2); }
+.article-card-home:hover { border-color:var(--accent); background:rgba(41,98,255,.04); transform:translateY(-2px); }
+.card-tag { display:inline-block; font-size:10px; font-weight:700; color:var(--tag-color); background:var(--tag-bg); padding:2px 7px; border-radius:3px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
+.card-title { font-size:14px; font-weight:600; color:var(--bright); line-height:1.35; margin-bottom:7px; }
+.card-excerpt { font-size:12px; color:var(--text2); line-height:1.6; margin-bottom:10px; }
+.card-meta { display:flex; align-items:center; gap:7px; }
+.card-author { font-size:11px; color:var(--text2); font-weight:500; }
+.card-read { font-size:11px; color:var(--text2); margin-left:auto; }
+
+/* LIST ARTICLES */
+.article-list-section { border-top:1px solid var(--border); }
+.art-list-item { display:flex; justify-content:space-between; gap:16px; padding:14px 20px; border-bottom:1px solid var(--border); cursor:pointer; transition:background .12s; }
+.art-list-item:hover { background:rgba(255,255,255,.018); }
+.art-list-left { flex:1; }
+.art-list-tag { display:inline-block; font-size:10px; font-weight:700; color:var(--tag-color); background:var(--tag-bg); padding:2px 7px; border-radius:3px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.art-list-title { font-size:14px; font-weight:600; color:var(--bright); line-height:1.35; margin-bottom:5px; }
+.art-list-title:hover { color:var(--accent); }
+.art-list-excerpt { font-size:12px; color:var(--text2); line-height:1.55; margin-bottom:8px; }
+.art-list-meta { display:flex; align-items:center; gap:7px; }
+.art-list-right { display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex-shrink:0; }
+.level-badge { font-size:10px; padding:2px 8px; border-radius:3px; font-weight:600; }
+
+/* ── ARTICLE PAGE ── */
+.article-page-inner { padding:24px 28px; max-width:760px; }
+.ap-tag { display:inline-block; font-size:10px; font-weight:700; color:var(--tag-color); background:var(--tag-bg); padding:3px 10px; border-radius:3px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:14px; }
+.ap-title { font-family:'Playfair Display',serif; font-size:30px; font-weight:700; color:var(--bright); line-height:1.2; margin-bottom:12px; }
+.ap-summary { font-size:15px; color:var(--text2); line-height:1.65; margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid var(--border); }
+.ap-meta { display:flex; align-items:center; gap:10px; margin-bottom:24px; }
+.ap-avatar { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; flex-shrink:0; }
+.ap-author { font-size:13px; color:var(--text); font-weight:600; }
+.ap-role { font-size:11px; color:var(--text2); }
+.ap-date { font-size:11px; color:var(--text2); margin-left:auto; }
+.ap-body { font-size:14px; color:var(--text); line-height:1.8; }
+.ap-body p { margin-bottom:16px; }
+.ap-body h3 { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin:28px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+.step-row { display:flex; gap:14px; margin-bottom:16px; align-items:flex-start; }
+.step-n { background:var(--accent); color:#fff; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; flex-shrink:0; margin-top:2px; }
+.step-text { font-size:13px; color:var(--text); line-height:1.7; }
+.step-text strong { color:var(--bright); display:block; font-size:13px; margin-bottom:3px; font-weight:600; }
+.code-box { background:#0d1117; border:1px solid var(--border); border-left:2px solid var(--accent); padding:14px 16px; border-radius:0 5px 5px 0; font-family:'Courier New',monospace; font-size:12px; color:#7ec8a4; line-height:1.7; margin:12px 0; white-space:pre-wrap; overflow-x:auto; }
+.tip-box { background:rgba(41,98,255,.07); border:1px solid rgba(41,98,255,.2); border-radius:5px; padding:12px 16px; font-size:13px; color:var(--text2); line-height:1.65; margin:14px 0; }
+.tip-box strong { color:var(--accent); }
+.divider { border:none; border-top:1px solid var(--border); margin:28px 0; }
+
+/* RELATED ARTICLES */
+.related { padding:16px; }
+.related-title { font-size:10px; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:.8px; margin-bottom:12px; }
+.related-item { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); cursor:pointer; }
+.related-item:last-child { border:none; }
+.related-thumb { width:46px; height:46px; border-radius:5px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+.related-info { flex:1; }
+.related-tag { font-size:10px; color:var(--tag-color); text-transform:uppercase; font-weight:600; margin-bottom:3px; }
+.related-t { font-size:12px; color:var(--text); line-height:1.4; font-weight:500; }
+.related-t:hover { color:var(--accent); }
+.progress-bar { height:2px; background:var(--border); margin-bottom:20px; border-radius:1px; }
+.progress-fill { height:100%; background:var(--accent); border-radius:1px; width:0%; transition:width .3s; }
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
+<!-- TOPBAR -->
 <div class="topbar">
-  <div class="topbar-left">
-    <div class="logo">Claude <span>Daily</span></div>
-    <nav class="nav-links">
-      <a class="nav-link active" href="#">Tutoriales</a>
-      <a class="nav-link" href="#">Productividad</a>
-      <a class="nav-link" href="#">Desarrollo</a>
-      <a class="nav-link" href="#">Finanzas</a>
+  <div style="display:flex;align-items:center;gap:20px">
+    <div class="logo" onclick="goHome()">Claude <span>Daily</span></div>
+    <nav class="nav">
+      <button class="nav-btn active" onclick="filterCat('todos',this)">Todo</button>
+      <button class="nav-btn" onclick="filterCat('productividad',this)">Productividad</button>
+      <button class="nav-btn" onclick="filterCat('finanzas',this)">Finanzas</button>
+      <button class="nav-btn" onclick="filterCat('desarrollo',this)">Desarrollo</button>
+      <button class="nav-btn" onclick="filterCat('escritura',this)">Escritura</button>
     </nav>
   </div>
   <div class="topbar-right">
-    <span class="date-badge">Miercoles, 16 Abr 2026</span>
+    <button class="back-btn" id="backBtn" onclick="goHome()">← Volver al inicio</button>
+    <span class="date-chip">16 Abr 2026</span>
   </div>
 </div>
 
-<!-- MAIN LAYOUT -->
+<!-- LAYOUT -->
 <div class="layout">
 
-  <!-- SIDEBAR LEFT -->
-  <aside class="sidebar-left">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Categorias</div>
-      <div class="sidebar-item active">
-        <div class="sidebar-dot" style="background:#2962ff"></div>
-        Todos los tutoriales
+  <!-- SIDEBAR IZQUIERDA -->
+  <aside class="sidebar-l">
+    <div class="sl-label">Categorias</div>
+    <div class="sl-item active" onclick="filterCat('todos',null,this)"><div class="sl-dot" style="background:#2962ff"></div>Todos</div>
+    <div class="sl-item" onclick="filterCat('productividad',null,this)"><div class="sl-dot" style="background:#26a69a"></div>Productividad</div>
+    <div class="sl-item" onclick="filterCat('finanzas',null,this)"><div class="sl-dot" style="background:#f7a600"></div>Finanzas</div>
+    <div class="sl-item" onclick="filterCat('desarrollo',null,this)"><div class="sl-dot" style="background:#9c27b0"></div>Desarrollo Web</div>
+    <div class="sl-item" onclick="filterCat('escritura',null,this)"><div class="sl-dot" style="background:#ef5350"></div>Escritura</div>
+    <div class="sl-item" onclick="filterCat('datos',null,this)"><div class="sl-dot" style="background:#00bcd4"></div>Datos</div>
+    <div class="sl-label" style="margin-top:14px">Nivel</div>
+    <div class="sl-item">Principiante</div>
+    <div class="sl-item">Intermedio</div>
+    <div class="sl-item">Avanzado</div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main style="overflow:hidden">
+
+    <!-- HOME PAGE -->
+    <div id="page-home">
+      <div class="home-tabs">
+        <div class="h-tab active">Destacados</div>
+        <div class="h-tab">Mas leidos</div>
+        <div class="h-tab">Recientes</div>
       </div>
-      <div class="sidebar-item">
-        <div class="sidebar-dot" style="background:#26a69a"></div>
-        Productividad
+
+      <!-- ARTICULO FEATURED -->
+      <div class="featured" onclick="openArticle(0)">
+        <div class="feat-eyebrow">Tutorial del dia</div>
+        <div class="feat-tag">Finanzas Personales</div>
+        <div class="feat-title">Analice 6 meses de gastos en 10 minutos usando IA</div>
+        <div class="feat-excerpt">Exporte los movimientos de mi banco, los paste en Claude y en menos de un cuarto de hora tenia un analisis completo por categorias, alertas de gastos inusuales y proyecciones para el mes siguiente. Asi lo hice, paso a paso.</div>
+        <div class="feat-meta">
+          <div class="avatar" style="width:26px;height:26px;font-size:10px;background:#2d4a6e;">SO</div>
+          <span class="author-name">Sofia Ormachea</span>
+          <span class="sep">·</span>
+          <span class="read-time">Contadora, Buenos Aires</span>
+          <span class="sep">·</span>
+          <span class="read-time">5 min lectura</span>
+        </div>
+        <div class="feat-cta">Leer tutorial completo</div>
       </div>
-      <div class="sidebar-item">
-        <div class="sidebar-dot" style="background:#f7a600"></div>
-        Finanzas
+
+      <!-- SECCION: ULTIMOS TUTORIALES -->
+      <div class="section-header">
+        <span class="section-label">Ultimos tutoriales</span>
+        <span class="section-more">Ver todos →</span>
       </div>
-      <div class="sidebar-item">
-        <div class="sidebar-dot" style="background:#9c27b0"></div>
-        Desarrollo Web
+      <div class="article-grid">
+        <div class="article-card-home" onclick="openArticle(1)">
+          <div class="card-tag">Desarrollo Web</div>
+          <div class="card-title">Arme mi portfolio profesional desde cero sin saber programar</div>
+          <div class="card-excerpt">Soy disenador, no programador. Con IA como copiloto construi un sitio web completo en una tarde, con animaciones y formulario de contacto funcional.</div>
+          <div class="card-meta">
+            <div class="avatar" style="width:20px;height:20px;font-size:9px;background:#2d6e4a;">LV</div>
+            <span class="card-author">Lucas Valderrama</span>
+            <span class="card-read">7 min</span>
+          </div>
+        </div>
+        <div class="article-card-home" onclick="openArticle(2)">
+          <div class="card-tag">Productividad</div>
+          <div class="card-title">Como preparo y resumo mis reuniones en menos de 5 minutos</div>
+          <div class="card-excerpt">Como PM con 6 reuniones diarias, tenia un problema. Ahora tengo un sistema de 3 prompts que me da agenda, preguntas clave y follow-up automatico.</div>
+          <div class="card-meta">
+            <div class="avatar" style="width:20px;height:20px;font-size:9px;background:#6e4a2d;">MR</div>
+            <span class="card-author">Mariana Rios</span>
+            <span class="card-read">6 min</span>
+          </div>
+        </div>
       </div>
-      <div class="sidebar-item">
-        <div class="sidebar-dot" style="background:#ef5350"></div>
-        Escritura
+
+      <!-- LISTA DE ARTICULOS -->
+      <div class="article-list-section">
+        <div class="section-header"><span class="section-label">Mas articulos</span></div>
+        <div class="art-list-item" onclick="openArticle(3)">
+          <div class="art-list-left">
+            <div class="art-list-tag">Escritura</div>
+            <div class="art-list-title">Cómo redacté un plan de negocios de 20 páginas en una tarde</div>
+            <div class="art-list-excerpt">Tenia la idea pero no el tiempo ni las palabras. Usando IA como co-redactor, estructure, desarrolle y pulie el documento completo en una sola sesion.</div>
+            <div class="art-list-meta">
+              <div class="avatar" style="width:20px;height:20px;font-size:9px;background:#5a2d7e;">JP</div>
+              <span class="card-author">Joaquin Pereyra</span>
+              <span class="sep">·</span>
+              <span class="read-time">8 min · Intermedio</span>
+            </div>
+          </div>
+          <div class="art-list-right">
+            <span class="level-badge" style="background:rgba(247,166,0,.12);color:#f7a600">Intermedio</span>
+          </div>
+        </div>
+        <div class="art-list-item" onclick="openArticle(4)">
+          <div class="art-list-left">
+            <div class="art-list-tag">Datos</div>
+            <div class="art-list-title">Analisis de ventas: de Excel crudo a dashboard en 20 minutos</div>
+            <div class="art-list-excerpt">Tenia tres meses de datos de ventas en un Excel desordenado. Le pedi a la IA que los limpiara, agrupara por categoria y generara visualizaciones. El resultado fue mejor de lo que esperaba.</div>
+            <div class="art-list-meta">
+              <div class="avatar" style="width:20px;height:20px;font-size:9px;background:#1a5276;">CV</div>
+              <span class="card-author">Carolina Villalba</span>
+              <span class="sep">·</span>
+              <span class="read-time">10 min · Intermedio</span>
+            </div>
+          </div>
+          <div class="art-list-right">
+            <span class="level-badge" style="background:rgba(247,166,0,.12);color:#f7a600">Intermedio</span>
+          </div>
+        </div>
+        <div class="art-list-item" onclick="openArticle(5)">
+          <div class="art-list-left">
+            <div class="art-list-tag">Productividad</div>
+            <div class="art-list-title">Como automatice el seguimiento de mis clientes con prompts simples</div>
+            <div class="art-list-excerpt">Tenia 40 clientes y ningún CRM. Empece a usar IA para registrar interacciones, generar recordatorios y redactar emails de seguimiento. El resultado cambio mi forma de trabajar.</div>
+            <div class="art-list-meta">
+              <div class="avatar" style="width:20px;height:20px;font-size:9px;background:#1a6b3a;">AR</div>
+              <span class="card-author">Agustina Ramos</span>
+              <span class="sep">·</span>
+              <span class="read-time">7 min · Principiante</span>
+            </div>
+          </div>
+          <div class="art-list-right">
+            <span class="level-badge" style="background:rgba(38,166,154,.12);color:#26a69a">Principiante</span>
+          </div>
+        </div>
       </div>
-      <div class="sidebar-item">
-        <div class="sidebar-dot" style="background:#00bcd4"></div>
-        Datos y Analisis
+    </div><!-- /#page-home -->
+
+    <!-- ARTICLE PAGE -->
+    <div id="page-article" style="display:none;overflow-y:auto;max-height:calc(100vh - 48px)">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="article-page-inner" id="articleContent"></div>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR DERECHA -->
+  <aside class="sidebar-r">
+    <div class="widget">
+      <div class="widget-title">Tendencias</div>
+      <div class="trend-item" onclick="openArticle(0)">
+        <div class="trend-num">1</div>
+        <div><div class="trend-title">Analizar gastos bancarios con IA</div><div class="trend-meta">Finanzas · 2.4k lecturas</div></div>
+      </div>
+      <div class="trend-item" onclick="openArticle(2)">
+        <div class="trend-num">2</div>
+        <div><div class="trend-title">Sistema de prompts para reuniones</div><div class="trend-meta">Productividad · 1.9k</div></div>
+      </div>
+      <div class="trend-item" onclick="openArticle(1)">
+        <div class="trend-num">3</div>
+        <div><div class="trend-title">Portfolio web sin programar</div><div class="trend-meta">Desarrollo · 1.5k</div></div>
+      </div>
+      <div class="trend-item" onclick="openArticle(4)">
+        <div class="trend-num">4</div>
+        <div><div class="trend-title">Dashboard de ventas desde Excel</div><div class="trend-meta">Datos · 1.2k</div></div>
+      </div>
+      <div class="trend-item" onclick="openArticle(3)">
+        <div class="trend-num">5</div>
+        <div><div class="trend-title">Plan de negocios en una tarde</div><div class="trend-meta">Escritura · 980</div></div>
       </div>
     </div>
-    <div class="sidebar-section" style="margin-top:16px">
-      <div class="sidebar-label">Nivel</div>
-      <div class="sidebar-item">Principiante</div>
-      <div class="sidebar-item">Intermedio</div>
-      <div class="sidebar-item">Avanzado</div>
+    <div class="widget">
+      <div class="widget-title">Estadisticas</div>
+      <div class="stat-row"><span class="stat-l">Tutoriales disponibles</span><span class="stat-v" style="color:var(--green)">6</span></div>
+      <div class="stat-row"><span class="stat-l">Prompts compartidos</span><span class="stat-v" style="color:var(--green)">18</span></div>
+      <div class="stat-row"><span class="stat-l">Tiempo promedio ahorrado</span><span class="stat-v" style="color:#f7a600">4.5h</span></div>
     </div>
-    <div class="sidebar-section" style="margin-top:16px">
-      <div class="sidebar-label">Duracion</div>
-      <div class="sidebar-item">Menos de 5 min</div>
-      <div class="sidebar-item">5 - 15 min</div>
-      <div class="sidebar-item">Mas de 15 min</div>
+    <div class="widget">
+      <div class="widget-title">Temas</div>
+      <div class="tag-cloud">
+        <span class="tag-pill">Prompts</span>
+        <span class="tag-pill">Excel</span>
+        <span class="tag-pill">Reuniones</span>
+        <span class="tag-pill">Codigo</span>
+        <span class="tag-pill">Escritura</span>
+        <span class="tag-pill">Emails</span>
+        <span class="tag-pill">Finanzas</span>
+        <span class="tag-pill">Portfolio</span>
+        <span class="tag-pill">Datos</span>
+        <span class="tag-pill">Clientes</span>
+      </div>
+    </div>
+    <div class="widget" id="relatedWidget" style="display:none">
+      <div class="related-title">Articulos relacionados</div>
+      <div id="relatedList"></div>
     </div>
   </aside>
 
-  <!-- MAIN CONTENT -->
-  <main class="main">
-    <div class="main-header">
-      <div class="main-title">Tutoriales practicos de IA</div>
-      <div class="tabs">
-        <div class="tab active">Todos</div>
-        <div class="tab">Mas leidos</div>
-        <div class="tab">Recientes</div>
-        <div class="tab">Principiante</div>
-      </div>
-    </div>
+</div><!-- /.layout -->
 
-    <div class="article-list">
-
-      <!-- ARTICULO 1 EXPANDIDO (featured) -->
-      <div class="article-expanded">
-        <div class="article-tag">Finanzas Personales</div>
-        <div class="article-title">Analice 6 meses de gastos en 10 minutos con IA</div>
-        <div class="article-summary">Exporte mis movimientos bancarios, los pase por Claude y obtuve categorias, alertas de gastos inusuales y proyecciones. Asi lo hice.</div>
-        <div class="article-meta" style="margin-bottom:16px">
-          <div class="author-avatar" style="background:#2d4a6e;">SO</div>
-          <span class="author-name">Sofia Ormachea</span>
-          <span class="dot-sep">·</span>
-          <span class="author-role">Contadora, Buenos Aires</span>
-          <span class="dot-sep">·</span>
-          <span class="read-time">5 min lectura</span>
-        </div>
-        <div class="article-body">
-          <p>Llevaba meses queriendo entender a donde se iba mi plata. Tenia los extractos del banco en PDF pero nunca me ponia a analizarlos. Un domingo a la tarde decidi probarlo con IA y el resultado me sorprendio.</p>
-          <p>El proceso completo me llevo menos de 15 minutos. Lo que mas me gusto fue que no solo me dio numeros sino que me explico patrones: "tus gastos en delivery aumentaron 40% en marzo" o "hay tres suscripciones que no reconoces facilmente por el nombre".</p>
-
-          <div class="tutorial-header">Como hacerlo — paso a paso</div>
-
-          <div class="step-row">
-            <div class="step-n">1</div>
-            <div class="step-text"><strong>Exporta tus movimientos</strong>Desde el home banking baja el extracto de los ultimos 3-6 meses en CSV o Excel. La mayoria de los bancos lo tiene en "Descargar movimientos".</div>
-          </div>
-          <div class="step-row">
-            <div class="step-n">2</div>
-            <div class="step-text"><strong>Sube el archivo y usa este prompt</strong>Adjunta el CSV directamente en el chat:</div>
-          </div>
-          <div class="code-box">Analiza estos movimientos bancarios. Necesito:
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const articles = [
+  {
+    id: 0,
+    tag: 'Finanzas Personales',
+    tagColor: '#f7a600',
+    title: 'Analice 6 meses de gastos en 10 minutos usando IA',
+    summary: 'Exporte los movimientos de mi banco, los paste en Claude y en menos de un cuarto de hora tenia un analisis completo por categorias, alertas de gastos inusuales y proyecciones para el mes siguiente.',
+    author: 'Sofia Ormachea', role: 'Contadora, Buenos Aires', initials: 'SO', avatarBg: '#2d4a6e',
+    readTime: '5 min', level: 'Principiante', cat: 'finanzas',
+    body: `
+      <p>Llevaba meses queriendo entender a donde se iba mi plata. Tenia los extractos del banco en PDF pero nunca me ponia a analizarlos en serio. Un domingo a la tarde decidi probarlo con IA y el resultado me sorprendio.</p>
+      <p>El proceso completo me llevo menos de 15 minutos, incluyendo el tiempo de exportar los archivos. Lo que mas me gusto fue que no solo me dio numeros sino que me explico patrones: "tus gastos en delivery aumentaron 40% en marzo" o "hay tres suscripciones que no reconoces facilmente por el nombre del cobro".</p>
+      <h3>Como hacerlo — paso a paso</h3>
+      <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Exporta tus movimientos</strong>Desde el home banking baja el extracto de los ultimos 3-6 meses en formato CSV o Excel. La mayoria de los bancos lo tiene en "Descargar movimientos" o "Exportar historial".</div></div>
+      <div class="step-row"><div class="step-n">2</div><div class="step-text"><strong>Sube el archivo y usa este prompt</strong>Adjunta el CSV directamente en el chat y escribi esto:</div></div>
+      <div class="code-box">Analiza estos movimientos bancarios. Necesito:
 1. Categorias de gastos (comida, transporte, suscripciones, etc.)
-2. Top 5 de donde mas gasto
-3. Comparacion por mes
-4. Gastos que parecen inusuales o duplicados
+2. Top 5 de donde mas gasto por mes
+3. Comparacion entre meses
+4. Gastos que parecen inusuales o posiblemente duplicados
 5. Proyeccion aproximada del proximo mes
 Presenta todo de forma clara, sin tecnicismos.</div>
-          <div class="step-row">
-            <div class="step-n">3</div>
-            <div class="step-text"><strong>Pide el desglose por categoria</strong>Despues del primer analisis, pregunta especificamente: "Cuanto gaste en suscripciones? Cuales son?"</div>
-          </div>
-          <div class="step-row">
-            <div class="step-n">4</div>
-            <div class="step-text"><strong>Pide un presupuesto sugerido</strong>Con los datos en contexto: "En base a mis gastos historicos, armame un presupuesto realista para el proximo mes con un objetivo de ahorro del 15%."</div>
-          </div>
-          <div class="tip-box"><strong>Tip de privacidad:</strong> Si queres mayor privacidad, reemplaza los nombres de comercios por categorias antes de subir el archivo. El analisis funciona igual.</div>
-        </div>
-      </div>
-
-      <!-- ARTICULO 2 COMPACTO -->
-      <div class="article-card">
-        <div>
-          <div class="article-tag">Desarrollo Web</div>
-          <div class="article-title">Arme mi portfolio profesional desde cero sin saber programar</div>
-          <div class="article-summary">Soy disenador, no programador. Con IA como copiloto construi un sitio web completo en una tarde, con animaciones y formulario de contacto funcional.</div>
-          <div class="article-meta">
-            <div class="author-avatar" style="background:#2d6e4a;">LV</div>
-            <span class="author-name">Lucas Valderrama</span>
-            <span class="dot-sep">·</span>
-            <span class="author-role">Disenador UX, Medellin</span>
-            <span class="dot-sep">·</span>
-            <span class="read-time">7 min</span>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
-          <span style="font-size:11px;color:var(--text-secondary)">Principiante</span>
-          <span style="font-size:11px;background:rgba(38,166,154,0.12);color:#26a69a;padding:3px 8px;border-radius:3px;">Destacado</span>
-        </div>
-      </div>
-
-      <!-- ARTICULO 2 EXPANDIDO -->
-      <div style="padding:0 20px 20px;background:rgba(41,98,255,0.02);border-bottom:1px solid var(--border)">
-        <div class="article-body" style="padding-top:16px">
-          <p>Siempre tuve excusas para no tener portfolio propio: no se HTML, no se hostear, no tengo tiempo. En un sabado libre decidi que era ahora o nunca, y con IA como copiloto lo termine antes de la cena.</p>
-          <p>La clave es no pedirle que "haga todo solo" sino trabajar en iteraciones cortas. Primero la estructura, despues el diseno, despues cada seccion.</p>
-          <div class="tutorial-header">El proceso que use</div>
-          <div class="step-row">
-            <div class="step-n">1</div>
-            <div class="step-text"><strong>Define la estructura primero</strong>Describe en palabras lo que queres: "Necesito un portfolio con: header con mi nombre, seccion de proyectos en grilla, sobre mi y formulario de contacto."</div>
-          </div>
-          <div class="step-row">
-            <div class="step-n">2</div>
-            <div class="step-text"><strong>Pide el HTML base</strong></div>
-          </div>
-          <div class="code-box">Crea un portfolio web en un solo archivo HTML+CSS+JS.
-Estilo: minimalista, oscuro, tipografia moderna.
-Secciones: hero con nombre y tagline, proyectos en grid 3 columnas con hover effect, about con foto placeholder, contacto con formulario.
-Que sea responsive. No uses frameworks externos, solo vanilla CSS.</div>
-          <div class="step-row">
-            <div class="step-n">3</div>
-            <div class="step-text"><strong>Itera por partes</strong>Una vez con el esqueleto, ajusta seccion por seccion: "Cambia los colores a esta paleta: #0a0a0a, #2962ff, #f0f0f0"</div>
-          </div>
-          <div class="step-row">
-            <div class="step-n">4</div>
-            <div class="step-text"><strong>Subilo gratis con GitHub Pages</strong>Crea cuenta en github.com, sube el archivo index.html y activa Pages en Settings. Tu URL queda lista en minutos.</div>
-          </div>
-          <div class="tip-box"><strong>Pro tip:</strong> Pide que genere el HTML con comentarios explicando cada seccion. Asi podes editarlo vos mismo despues sin perderte.</div>
-        </div>
-      </div>
-
-      <!-- ARTICULO 3 COMPACTO -->
-      <div class="article-card">
-        <div>
-          <div class="article-tag">Productividad</div>
-          <div class="article-title">Como uso IA para preparar y resumir reuniones en menos de 5 minutos</div>
-          <div class="article-summary">Antes tardaba una hora preparando cada reunion. Ahora tengo un sistema de prompts que me da agenda, preguntas clave y resumen completo.</div>
-          <div class="article-meta">
-            <div class="author-avatar" style="background:#6e4a2d;">MR</div>
-            <span class="author-name">Mariana Rios</span>
-            <span class="dot-sep">·</span>
-            <span class="author-role">Project Manager, Ciudad de Mexico</span>
-            <span class="dot-sep">·</span>
-            <span class="read-time">6 min</span>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
-          <span style="font-size:11px;color:var(--text-secondary)">Principiante</span>
-        </div>
-      </div>
-
-      <!-- ARTICULO 3 EXPANDIDO -->
-      <div style="padding:0 20px 20px;background:rgba(41,98,255,0.02);border-bottom:1px solid var(--border)">
-        <div class="article-body" style="padding-top:16px">
-          <p>Como PM tengo entre 4 y 6 reuniones por dia. La preparacion me consumia horas cada semana. Ahora tengo un sistema que me lleva 5 minutos en total.</p>
-          <div class="tutorial-header">Mis 3 prompts que uso cada dia</div>
-          <div class="step-row">
-            <div class="step-n">1</div>
-            <div class="step-text"><strong>Prompt de preparacion (antes de la reunion)</strong></div>
-          </div>
-          <div class="code-box">Tengo una reunion en 30 minutos con [nombre/rol].
+      <div class="step-row"><div class="step-n">3</div><div class="step-text"><strong>Pide el desglose por categoria</strong>Despues del primer analisis, profundiza: "Cuanto gaste en suscripciones en total? Cuales son y cuanto cuesta cada una?"</div></div>
+      <div class="step-row"><div class="step-n">4</div><div class="step-text"><strong>Pide un presupuesto realista</strong>Con todos los datos en contexto: "En base a mis gastos historicos, armame un presupuesto para el proximo mes con un objetivo de ahorro del 15%."</div></div>
+      <div class="step-row"><div class="step-n">5</div><div class="step-text"><strong>Exporta el resumen</strong>Pide que genere el resumen en formato tabla. Podes copiar y pegar en Excel o Google Sheets para tener un registro.</div></div>
+      <div class="tip-box"><strong>Tip de privacidad:</strong> Si queres mayor privacidad, reemplaza los nombres de comercios por categorias antes de subir el archivo. El analisis funciona exactamente igual.</div>
+      <p>El resultado fue un analisis completo con tabla por categorias, comparacion mensual y tres recomendaciones concretas. Lo que antes me llevaba un fin de semana, ahora son 10 minutos.</p>
+    `
+  },
+  {
+    id: 1,
+    tag: 'Desarrollo Web',
+    tagColor: '#9c27b0',
+    title: 'Arme mi portfolio profesional desde cero sin saber programar',
+    summary: 'Soy disenador UX, no programador. Con IA como copiloto construi un sitio web completo en una tarde, con animaciones, diseno responsive y formulario de contacto funcional.',
+    author: 'Lucas Valderrama', role: 'Disenador UX, Medellin', initials: 'LV', avatarBg: '#2d6e4a',
+    readTime: '7 min', level: 'Principiante', cat: 'desarrollo',
+    body: `
+      <p>Siempre tuve excusas para no tener portfolio propio: no se HTML, no se hostear, no tengo tiempo. En un sabado libre decidi que era ahora o nunca, y con IA como copiloto lo termine antes de la cena.</p>
+      <p>La clave es no pedirle que "haga todo solo" sino trabajar en iteraciones cortas. Primero la estructura, despues el diseno, despues cada seccion. Asi mantenes el control sin necesitar conocimiento tecnico.</p>
+      <h3>El proceso que use</h3>
+      <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Define la estructura primero (en palabras)</strong>Antes de pedir codigo, describe lo que queres: "Necesito un portfolio con: header con mi nombre y foto, seccion de proyectos en grilla, pagina sobre mi y formulario de contacto."</div></div>
+      <div class="step-row"><div class="step-n">2</div><div class="step-text"><strong>Pide el HTML base con este prompt</strong></div></div>
+      <div class="code-box">Crea un portfolio web profesional en un solo archivo HTML+CSS+JS.
+Estilo: minimalista, fondo oscuro (#0a0a0a), tipografia moderna (Inter).
+Secciones:
+- Hero con nombre, tagline y boton "Ver mi trabajo"
+- Proyectos en grid 3 columnas con imagen placeholder, titulo y descripcion corta, efecto hover con overlay
+- About con foto circular placeholder y 3 columnas de skills
+- Contacto con formulario (nombre, email, mensaje) y boton enviar
+Que sea responsive (mobile-first). Sin frameworks externos.</div>
+      <div class="step-row"><div class="step-n">3</div><div class="step-text"><strong>Itera por secciones</strong>Una vez que tenes el esqueleto, ajusta de a una cosa: "Cambia los colores a esta paleta: primario #2962ff, fondo #0a0a0a, texto #f0f0f0" o "Agrega una animacion de fade-in al hacer scroll en los proyectos".</div></div>
+      <div class="step-row"><div class="step-n">4</div><div class="step-text"><strong>Agrega tu contenido real</strong>Pide: "Ayudame a reemplazar el contenido placeholder con mi informacion real. Estos son mis proyectos: [describir]. Este es mi perfil: [describir]."</div></div>
+      <div class="step-row"><div class="step-n">5</div><div class="step-text"><strong>Publicalo gratis con GitHub Pages</strong>Crea cuenta en github.com, sube el archivo index.html a un repositorio nuevo llamado "tunombre.github.io" y activa Pages en Settings. Tu URL queda lista en minutos, sin pagar hosting.</div></div>
+      <div class="tip-box"><strong>Pro tip:</strong> Pide que genere el HTML con comentarios explicando cada seccion. Asi podes editarlo vos mismo despues sin perderte en el codigo.</div>
+      <p>Mi portfolio hoy tiene mas visitas que los de companeros que contrataron a un desarrollador. Y si quiero cambiar algo, en 2 minutos esta listo.</p>
+    `
+  },
+  {
+    id: 2,
+    tag: 'Productividad',
+    tagColor: '#26a69a',
+    title: 'Como preparo y resumo mis reuniones en menos de 5 minutos',
+    summary: 'Como PM con 6 reuniones diarias, la preparacion me consumia horas. Ahora tengo un sistema de 3 prompts que me da agenda, preguntas clave y follow-up automatico.',
+    author: 'Mariana Rios', role: 'Project Manager, Ciudad de Mexico', initials: 'MR', avatarBg: '#6e4a2d',
+    readTime: '6 min', level: 'Principiante', cat: 'productividad',
+    body: `
+      <p>Como PM tengo entre 4 y 6 reuniones por dia. La preparacion me consumia horas cada semana: revisar contexto, armar agenda, preparar preguntas, tomar notas y escribir el follow-up. Ahora tengo un sistema que me lleva 5 minutos en total.</p>
+      <p>El truco esta en tener prompts guardados y reusables. No improviso cada vez: tengo tres plantillas que adapto segun el tipo de reunion.</p>
+      <h3>Mis 3 prompts esenciales</h3>
+      <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Antes de la reunion: preparacion</strong>Pega el contexto (emails, notas previas) y usa esto:</div></div>
+      <div class="code-box">Tengo una reunion en 30 minutos con [nombre/rol].
 Contexto: [pegar emails o notas relevantes]
-Objetivo: [describir en 1 linea]
+Objetivo de la reunion: [describir en 1 linea]
 
 Dame:
-- Agenda sugerida con tiempos
+- Agenda sugerida con tiempos (reunion de X minutos)
 - 5 preguntas clave que debo hacer
 - Posibles objeciones y como responderlas
 - Que necesito tener listo antes de entrar</div>
-          <div class="step-row">
-            <div class="step-n">2</div>
-            <div class="step-text"><strong>Prompt de resumen (despues de la reunion)</strong>Graba la reunion con cualquier app (Otter, Zoom) y pega la transcripcion:</div>
-          </div>
-          <div class="code-box">Esta es la transcripcion de mi reunion:
+      <div class="step-row"><div class="step-n">2</div><div class="step-text"><strong>Despues de la reunion: resumen</strong>Graba con Otter, Zoom o el dictado del celular, y pega la transcripcion:</div></div>
+      <div class="code-box">Esta es la transcripcion de mi reunion de hoy:
 [pegar transcripcion]
 
 Necesito:
 - Resumen ejecutivo en 3 puntos
-- Decisiones tomadas
-- Action items con responsable y fecha
-- Temas pendientes para proxima reunion</div>
-          <div class="step-row">
-            <div class="step-n">3</div>
-            <div class="step-text"><strong>Prompt de follow-up (email post-reunion)</strong></div>
-          </div>
-          <div class="code-box">Escribi un email de follow-up profesional basado en este resumen.
-Incluir: agradecimiento breve, decisiones clave, proximos pasos con fechas.
+- Decisiones que se tomaron
+- Action items con responsable y fecha limite
+- Temas que quedaron pendientes para la proxima reunion
+Formato claro, sin texto de relleno.</div>
+      <div class="step-row"><div class="step-n">3</div><div class="step-text"><strong>Email de follow-up</strong></div></div>
+      <div class="code-box">En base a este resumen de reunion, escribe un email de follow-up profesional.
+Debe incluir: agradecimiento breve, decisiones clave, proximos pasos con fechas y responsables.
 Tono: formal pero directo. Maximo 200 palabras.</div>
-          <div class="tip-box"><strong>Tip de flujo:</strong> Guarda estos prompts en una nota. Copiar y pegar tarda 30 segundos. En una semana recuperas horas.</div>
-        </div>
-      </div>
+      <div class="step-row"><div class="step-n">4</div><div class="step-text"><strong>Bonus: antes de una negociacion dificil</strong></div></div>
+      <div class="code-box">Tengo una negociacion con [contexto].
+Mi posicion: [describir]
+Lo que quiero lograr: [objetivo]
 
+Ayudame a: anticipar los argumentos del otro lado, preparar mis contraargumentos y definir mis limites (que si acepto, que no).</div>
+      <div class="tip-box"><strong>Tip de flujo:</strong> Guarda estos prompts en una nota de Notion o Apple Notes. Copiar y pegar tarda 30 segundos. En una semana recuperas mas de 3 horas.</div>
+      <p>Desde que implemente este sistema, mis reuniones tienen mejor seguimiento y los action items se cumplen mas. Mi jefe me pregunto que habia cambiado.</p>
+    `
+  },
+  {
+    id: 3,
+    tag: 'Escritura',
+    tagColor: '#ef5350',
+    title: 'Como redacte un plan de negocios de 20 paginas en una tarde',
+    summary: 'Tenia la idea pero no el tiempo ni las palabras. Usando IA como co-redactor, estructure, desarrolle y pulie el documento completo en una sola sesion.',
+    author: 'Joaquin Pereyra', role: 'Emprendedor, Rosario', initials: 'JP', avatarBg: '#5a2d7e',
+    readTime: '8 min', level: 'Intermedio', cat: 'escritura',
+    body: `
+      <p>Hace tres meses tenia una idea clara para un negocio de logistica urbana pero cada vez que me sentaba a escribir el plan, me bloqueaba. La hoja en blanco es real. Decidi intentarlo con IA como copiloto y el resultado cambio todo.</p>
+      <p>No le pedi que "escriba mi plan de negocios" — eso produce algo generico y sin caracter. Lo use como estructurador primero, luego como redactor de secciones especificas, y finalmente como critico para mejorar el resultado.</p>
+      <h3>El flujo en 4 pasos</h3>
+      <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Estructura primero</strong>Antes de escribir una sola palabra, pide el indice:</div></div>
+      <div class="code-box">Voy a escribir un plan de negocios para [descripcion de tu idea en 2-3 oraciones].
+Publico objetivo: [describir]
+Mercado: [pais/region]
+
+Genera el indice completo de un plan de negocios profesional, adaptado a este tipo de negocio. Incluye todos los apartados necesarios para presentar a inversores.</div>
+      <div class="step-row"><div class="step-n">2</div><div class="step-text"><strong>Desarrolla seccion por seccion</strong>Una vez aprobado el indice, trabaja de a una seccion:</div></div>
+      <div class="code-box">Ahora desarrolla la seccion "Analisis de mercado" del plan.
+Contexto del negocio: [resumir]
+Datos que tengo: [mencionar lo que sabes del mercado]
+Tono: profesional pero directo. Longitud: 3-4 parrafos densos.</div>
+      <div class="step-row"><div class="step-n">3</div><div class="step-text"><strong>Fortalece con datos reales</strong>Para las secciones de mercado y competencia, pide que identifique que datos buscar y donde encontrarlos, para que vos los rellenes con informacion real.</div></div>
+      <div class="step-row"><div class="step-n">4</div><div class="step-text"><strong>Pide critica al final</strong></div></div>
+      <div class="code-box">Leiste todo mi plan de negocios. Actuando como un inversor exigente:
+- Que es lo mas debil del plan?
+- Que preguntas me harias en una presentacion?
+- Que secciones necesitan mas sustento?
+Se critico y especifico.</div>
+      <div class="tip-box"><strong>Importante:</strong> La IA genera la estructura y el lenguaje, pero los numeros, el conocimiento del mercado y la vision tienen que ser tuyos. Un buen plan de negocios se reconoce por su especificidad, no por su largo.</div>
+    `
+  },
+  {
+    id: 4,
+    tag: 'Datos',
+    tagColor: '#00bcd4',
+    title: 'De Excel crudo a dashboard de ventas en 20 minutos',
+    summary: 'Tenia tres meses de datos de ventas en un Excel desordenado. Le pedi a la IA que los limpiara, agrupara y generara visualizaciones. El resultado fue mejor de lo esperado.',
+    author: 'Carolina Villalba', role: 'Comercial, Santiago de Chile', initials: 'CV', avatarBg: '#1a5276',
+    readTime: '10 min', level: 'Intermedio', cat: 'datos',
+    body: `
+      <p>Trabajo como responsable comercial en una PYME y cada fin de mes tenia el mismo problema: un Excel con miles de filas de transacciones y la necesidad de presentar un resumen ejecutivo al directorio. El proceso manual me llevaba medio dia.</p>
+      <p>Decidi probar usando IA para todo el pipeline: limpieza, agrupacion, analisis y generacion del informe. Funciono mejor de lo que esperaba.</p>
+      <h3>El proceso completo</h3>
+      <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Limpia el Excel primero</strong>Antes de analizar, pide que identifique y corrija problemas:</div></div>
+      <div class="code-box">Tengo este archivo Excel con datos de ventas. Antes de analizar, ayudame a:
+1. Identificar filas duplicadas
+2. Estandarizar los nombres de productos (hay variantes del mismo nombre)
+3. Detectar valores faltantes o anomalos en las columnas de precio y cantidad
+4. Unificar el formato de fechas
+Indica que encontraste y como lo corregiste.</div>
+      <div class="step-row"><div class="step-n">2</div><div class="step-text"><strong>Genera el analisis de ventas</strong></div></div>
+      <div class="code-box">Analiza estos datos de ventas del trimestre. Necesito:
+- Ventas totales y comparacion con periodo anterior (si tengo datos)
+- Top 5 productos por volumen y por margen
+- Tendencia semanal: subiendo, bajando o estable?
+- Clientes que mas compraron
+- Cualquier patron inusual que notes
+Presenta como informe ejecutivo, con numeros claros.</div>
+      <div class="step-row"><div class="step-n">3</div><div class="step-text"><strong>Genera el codigo del dashboard</strong></div></div>
+      <div class="code-box">En base a este analisis, genera el codigo Python para crear un dashboard con matplotlib/seaborn que incluya:
+- Grafico de barras: ventas por mes
+- Grafico de torta: participacion por categoria de producto
+- Linea de tendencia: evolucion semanal
+- Tabla resumen con los KPIs principales
+Que el output sea un archivo HTML interactivo.</div>
+      <div class="step-row"><div class="step-n">4</div><div class="step-text"><strong>Redacta el informe para el directorio</strong>Con el analisis hecho, pide el texto del informe:</div></div>
+      <div class="code-box">Con base en este analisis, escribe el informe ejecutivo de ventas del trimestre para presentar al directorio.
+Formato: introduccion (1 parrafo), resultados clave (bullets), analisis (2-3 parrafos), recomendaciones (3 acciones concretas).
+Tono: profesional y directo. Sin jerga tecnica.</div>
+      <div class="tip-box"><strong>Tip avanzado:</strong> Si usas Google Sheets, podes conectar directamente via Apps Script y automatizar el proceso mensual sin volver a hacerlo manualmente.</div>
+    `
+  },
+  {
+    id: 5,
+    tag: 'Productividad',
+    tagColor: '#26a69a',
+    title: 'Como automatice el seguimiento de mis clientes con prompts simples',
+    summary: 'Tenia 40 clientes y ningun CRM. Empece a usar IA para registrar interacciones, generar recordatorios y redactar emails de seguimiento.',
+    author: 'Agustina Ramos', role: 'Consultora independiente, Montevideo', initials: 'AR', avatarBg: '#1a6b3a',
+    readTime: '7 min', level: 'Principiante', cat: 'productividad',
+    body: `
+      <p>Como consultora independiente manejo relaciones con mas de 40 clientes. Sin equipo y sin presupuesto para un CRM caro, estaba perdiendo seguimientos, olvidando fechas clave y tardando demasiado en redactar emails de propuesta.</p>
+      <p>La solucion fue armar un sistema simple de prompts que uso junto con una hoja de calculo. No es perfecto, pero resolvio el 80% de mi problema en un dia.</p>
+      <h3>El sistema en 3 piezas</h3>
+      <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Registro de interaccion rapida</strong>Despues de cada llamada o reunion, escribi un resumen rapido y usa este prompt:</div></div>
+      <div class="code-box">Acabo de hablar con [nombre del cliente de la empresa X].
+Lo que hablamos: [resumen de 3-5 lineas en bruto]
+
+Ayudame a:
+1. Estructurar esto como nota de CRM (fecha, contacto, resumen, proximos pasos)
+2. Identificar las acciones concretas que quedan pendientes de mi lado
+3. Sugerir fecha de proximo contacto segun el contexto</div>
+      <div class="step-row"><div class="step-n">2</div><div class="step-text"><strong>Email de seguimiento personalizado</strong></div></div>
+      <div class="code-box">Necesito escribir un email de seguimiento para [nombre/empresa].
+Contexto de la relacion: [describir en 2-3 lineas]
+Ultima interaccion: [cuando y de que hablaron]
+Objetivo del email: [propuesta, recordatorio, actualizacion, etc.]
+
+Tono: [formal/cercano/directo segun el cliente]
+Longitud: maximo 150 palabras. Sin frases de relleno.</div>
+      <div class="step-row"><div class="step-n">3</div><div class="step-text"><strong>Resumen semanal de clientes activos</strong>Los lunes, pega tu lista de clientes con el estado de cada uno y pide:</div></div>
+      <div class="code-box">Esta es mi lista de clientes activos con el estado de cada relacion:
+[pegar la tabla de tu hoja de calculo]
+
+Ayudame a:
+- Identificar cuales necesitan contacto urgente (sin actividad > 2 semanas)
+- Priorizar mi semana segun oportunidad y riesgo de perder el cliente
+- Sugerir el mensaje adecuado para cada uno segun el contexto</div>
+      <div class="tip-box"><strong>Como organizo la info:</strong> Tengo una hoja de Google Sheets simple con columnas: Cliente | Contacto | Ultimo contacto | Estado | Proxima accion. Cada semana la pego en el chat y el prompt hace el resto.</div>
+      <p>Desde que implemente esto, no perdi ningun seguimiento importante y el tiempo que dedico a redactar emails se redujo a la mitad.</p>
+    `
+  }
+];
+
+// ── NAVIGATION ───────────────────────────────────────────────────────────────
+function openArticle(id) {
+  const art = articles[id];
+  document.getElementById('page-home').style.display = 'none';
+  const artPage = document.getElementById('page-article');
+  artPage.style.display = 'block';
+  document.getElementById('backBtn').classList.add('visible');
+
+  const related = articles.filter(a => a.id !== id).slice(0,3);
+  const relatedHTML = related.map(r => `
+    <div class="related-item" onclick="openArticle(${r.id})">
+      <div class="related-thumb" style="background:${r.avatarBg}22;color:${r.tagColor};font-size:18px">📄</div>
+      <div class="related-info">
+        <div class="related-tag">${r.tag}</div>
+        <div class="related-t">${r.title}</div>
+      </div>
+    </div>`).join('');
+  document.getElementById('relatedList').innerHTML = relatedHTML;
+  document.getElementById('relatedWidget').style.display = 'block';
+
+  document.getElementById('articleContent').innerHTML = `
+    <div class="ap-tag">${art.tag}</div>
+    <div class="ap-title">${art.title}</div>
+    <div class="ap-summary">${art.summary}</div>
+    <div class="ap-meta">
+      <div class="ap-avatar" style="background:${art.avatarBg}">${art.initials}</div>
+      <div>
+        <div class="ap-author">${art.author}</div>
+        <div class="ap-role">${art.role}</div>
+      </div>
+      <div class="ap-date">${art.readTime} lectura · ${art.level}</div>
     </div>
-  </main>
+    <hr class="divider">
+    <div class="ap-body">${art.body}</div>
+  `;
 
-  <!-- SIDEBAR RIGHT -->
-  <aside class="sidebar-right">
-    <div class="widget">
-      <div class="widget-title">Tendencias</div>
-      <div class="trending-item">
-        <div class="trending-num">1</div>
-        <div>
-          <div class="trending-title">Automatizar reportes financieros con IA</div>
-          <div class="trending-meta">Finanzas &middot; 2.4k lecturas</div>
-        </div>
-      </div>
-      <div class="trending-item">
-        <div class="trending-num">2</div>
-        <div>
-          <div class="trending-title">Generar contenido para redes en segundos</div>
-          <div class="trending-meta">Marketing &middot; 1.8k lecturas</div>
-        </div>
-      </div>
-      <div class="trending-item">
-        <div class="trending-num">3</div>
-        <div>
-          <div class="trending-title">Revisar y mejorar codigo con IA</div>
-          <div class="trending-meta">Desarrollo &middot; 1.5k lecturas</div>
-        </div>
-      </div>
-      <div class="trending-item">
-        <div class="trending-num">4</div>
-        <div>
-          <div class="trending-title">Redactar contratos y documentos legales</div>
-          <div class="trending-meta">Legal &middot; 1.1k lecturas</div>
-        </div>
-      </div>
-      <div class="trending-item">
-        <div class="trending-num">5</div>
-        <div>
-          <div class="trending-title">Traduccion y localizacion de contenido</div>
-          <div class="trending-meta">Idiomas &middot; 980 lecturas</div>
-        </div>
-      </div>
-    </div>
+  artPage.scrollTop = 0;
+  artPage.addEventListener('scroll', updateProgress);
+}
 
-    <div class="widget">
-      <div class="widget-title">Estadisticas del dia</div>
-      <div class="stat-row"><span class="stat-label">Tutoriales publicados</span><span class="stat-val">3</span></div>
-      <div class="stat-row"><span class="stat-label">Prompts compartidos</span><span class="stat-val">9</span></div>
-      <div class="stat-row"><span class="stat-label">Tiempo promedio ahorrado</span><span class="stat-val" style="color:#f7a600">4.2h</span></div>
-      <div class="stat-row"><span class="stat-label">Nivel promedio</span><span class="stat-val" style="color:#26a69a">Principiante</span></div>
-    </div>
+function updateProgress() {
+  const el = document.getElementById('page-article');
+  const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
 
-    <div class="widget">
-      <div class="widget-title">Temas populares</div>
-      <div class="tag-cloud">
-        <span class="tag-pill">Prompts</span>
-        <span class="tag-pill">Automatizacion</span>
-        <span class="tag-pill">Excel</span>
-        <span class="tag-pill">Codigo</span>
-        <span class="tag-pill">Reuniones</span>
-        <span class="tag-pill">Escritura</span>
-        <span class="tag-pill">Emails</span>
-        <span class="tag-pill">Finanzas</span>
-        <span class="tag-pill">Datos</span>
-        <span class="tag-pill">Portfolio</span>
-      </div>
-    </div>
+function goHome() {
+  document.getElementById('page-home').style.display = 'block';
+  document.getElementById('page-article').style.display = 'none';
+  document.getElementById('backBtn').classList.remove('visible');
+  document.getElementById('relatedWidget').style.display = 'none';
+}
 
-    <div class="widget">
-      <div class="widget-title">Autores destacados</div>
-      <div class="trending-item">
-        <div class="author-avatar" style="background:#2d4a6e;width:28px;height:28px;font-size:10px;">SO</div>
-        <div>
-          <div class="trending-title">Sofia Ormachea</div>
-          <div class="trending-meta">Contadora &middot; 1 tutorial</div>
-        </div>
-      </div>
-      <div class="trending-item">
-        <div class="author-avatar" style="background:#2d6e4a;width:28px;height:28px;font-size:10px;">LV</div>
-        <div>
-          <div class="trending-title">Lucas Valderrama</div>
-          <div class="trending-meta">Disenador UX &middot; 1 tutorial</div>
-        </div>
-      </div>
-      <div class="trending-item">
-        <div class="author-avatar" style="background:#6e4a2d;width:28px;height:28px;font-size:10px;">MR</div>
-        <div>
-          <div class="trending-title">Mariana Rios</div>
-          <div class="trending-meta">Project Manager &middot; 1 tutorial</div>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-</div>
-
+function filterCat(cat, navBtn, sideBtn) {
+  // update nav buttons
+  if (navBtn) document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')), navBtn.classList.add('active');
+  if (sideBtn) document.querySelectorAll('.sl-item').forEach(b => b.classList.remove('active')), sideBtn.classList.add('active');
+  goHome();
+}
+</script>
 </body>
 </html>
