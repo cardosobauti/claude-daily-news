@@ -3,277 +3,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Daily — Casos de Uso Practicos</title>
+<title>Claude Daily — Tutoriales de IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+:root {
+  --bg-primary: #131722;
+  --bg-secondary: #1e222d;
+  --bg-tertiary: #2a2e39;
+  --bg-hover: #2a2e39;
+  --border: #2a2e39;
+  --border-light: #363a45;
+  --accent: #2962ff;
+  --accent-hover: #1e53e5;
+  --text-primary: #d1d4dc;
+  --text-secondary: #787b86;
+  --text-bright: #ffffff;
+  --green: #26a69a;
+  --red: #ef5350;
+  --tag-bg: rgba(41,98,255,0.12);
+  --tag-color: #5b9cf6;
+}
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Georgia', serif; background: #0a0a0a; color: #f0f0f0; }
-header { background: #111; border-bottom: 3px solid #e63946; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-.logo { font-size: 28px; font-weight: bold; letter-spacing: 2px; color: #fff; }
-.logo span { color: #e63946; }
-.date { color: #888; font-size: 14px; font-style: italic; }
-.hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 60px 40px; text-align: center; }
-.hero h2 { font-size: 13px; letter-spacing: 4px; color: #e63946; text-transform: uppercase; margin-bottom: 16px; }
-.hero h1 { font-size: 38px; font-weight: bold; line-height: 1.25; max-width: 760px; margin: 0 auto 20px; }
-.hero p { color: #aaa; font-size: 17px; max-width: 620px; margin: 0 auto; line-height: 1.6; }
-.container { max-width: 1200px; margin: 0 auto; padding: 50px 40px; }
-.section-title { font-size: 11px; letter-spacing: 3px; color: #e63946; text-transform: uppercase; margin-bottom: 32px; padding-bottom: 12px; border-bottom: 1px solid #2a2a2a; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px; }
-.card { background: #111; border: 1px solid #222; border-radius: 10px; overflow: hidden; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column; }
-.card:hover { transform: translateY(-5px); border-color: #e63946; box-shadow: 0 12px 30px rgba(230,57,70,0.12); }
-.card-badge { background: #e63946; color: white; font-size: 10px; font-family: Arial, sans-serif; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; display: inline-block; }
-.card-body { padding: 26px; flex: 1; display: flex; flex-direction: column; }
-.card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; margin-top: 4px; }
-.avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; font-family: Arial, sans-serif; flex-shrink: 0; }
-.author-info { display: flex; flex-direction: column; }
-.author-name { font-size: 13px; font-family: Arial, sans-serif; color: #ddd; font-weight: 600; }
-.author-role { font-size: 11px; font-family: Arial, sans-serif; color: #666; }
-.card-title { font-size: 20px; font-weight: bold; margin-bottom: 10px; line-height: 1.3; color: #f5f5f5; }
-.card-summary { color: #999; font-size: 14px; line-height: 1.65; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid #1e1e1e; }
-.card-text { color: #ccc; font-size: 14px; line-height: 1.85; flex: 1; }
-.card-text p { margin-bottom: 14px; }
-.tutorial-title { font-size: 11px; letter-spacing: 2px; color: #e63946; text-transform: uppercase; font-family: Arial, sans-serif; margin: 20px 0 12px; padding-top: 18px; border-top: 1px solid #1e1e1e; }
-.step { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
-.step-num { background: #e63946; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; font-family: Arial, sans-serif; flex-shrink: 0; margin-top: 1px; }
-.step-content { font-size: 13px; color: #bbb; line-height: 1.7; }
-.step-content strong { color: #f0f0f0; display: block; margin-bottom: 3px; font-family: Arial, sans-serif; }
-.code-block { background: #0d0d0d; border: 1px solid #2a2a2a; border-left: 3px solid #e63946; padding: 14px 16px; border-radius: 0 6px 6px 0; margin: 14px 0; font-family: 'Courier New', monospace; font-size: 12px; color: #a8d8a8; line-height: 1.7; overflow-x: auto; }
-.tip { background: rgba(230,57,70,0.07); border: 1px solid rgba(230,57,70,0.2); border-radius: 6px; padding: 12px 16px; margin: 16px 0; font-size: 13px; color: #ccc; line-height: 1.6; }
-.tip strong { color: #e63946; font-family: Arial, sans-serif; }
-.read-time { font-size: 11px; color: #555; font-family: Arial, sans-serif; margin-top: auto; padding-top: 16px; }
-footer { background: #0d0d0d; border-top: 1px solid #1e1e1e; padding: 35px 40px; text-align: center; color: #444; font-size: 13px; margin-top: 60px; font-family: Arial, sans-serif; }
-footer a { color: #e63946; text-decoration: none; }
-@media (max-width: 600px) { .hero h1 { font-size: 26px; } header { padding: 16px 20px; } .container { padding: 30px 20px; } }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); font-size: 13px; line-height: 1.5; }
+
+/* TOPBAR */
+.topbar { background: var(--bg-secondary); border-bottom: 1px solid var(--border); padding: 0 20px; height: 46px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.topbar-left { display: flex; align-items: center; gap: 24px; }
+.logo { font-size: 15px; font-weight: 700; color: var(--text-bright); letter-spacing: -0.3px; white-space: nowrap; }
+.logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2px; }
+.nav-link { padding: 6px 12px; border-radius: 4px; color: var(--text-secondary); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-decoration: none; }
+.nav-link:hover { color: var(--text-primary); background: var(--bg-hover); }
+.nav-link.active { color: var(--text-bright); background: var(--bg-tertiary); }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.date-badge { font-size: 11px; color: var(--text-secondary); background: var(--bg-tertiary); padding: 4px 10px; border-radius: 4px; }
+
+/* MAIN LAYOUT */
+.layout { display: grid; grid-template-columns: 220px 1fr 280px; min-height: calc(100vh - 46px); }
+
+/* SIDEBAR LEFT */
+.sidebar-left { border-right: 1px solid var(--border); padding: 16px 0; background: var(--bg-secondary); }
+.sidebar-section { margin-bottom: 4px; }
+.sidebar-label { font-size: 10px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px; padding: 8px 16px 4px; }
+.sidebar-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; cursor: pointer; color: var(--text-secondary); font-size: 13px; font-weight: 400; transition: all 0.15s; border-left: 2px solid transparent; }
+.sidebar-item:hover { color: var(--text-primary); background: var(--bg-hover); }
+.sidebar-item.active { color: var(--text-bright); background: rgba(41,98,255,0.08); border-left-color: var(--accent); font-weight: 500; }
+.sidebar-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+/* MAIN CONTENT */
+.main { padding: 0; overflow: hidden; }
+.main-header { padding: 16px 20px 0; border-bottom: 1px solid var(--border); }
+.main-title { font-size: 18px; font-weight: 600; color: var(--text-bright); margin-bottom: 14px; }
+.tabs { display: flex; gap: 0; }
+.tab { padding: 8px 16px; font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
+.tab:hover { color: var(--text-primary); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ARTICLE LIST */
+.article-list { padding: 0; }
+.article-card { padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.12s; display: grid; grid-template-columns: 1fr auto; gap: 16px; }
+.article-card:hover { background: rgba(255,255,255,0.02); }
+.article-card.featured { grid-template-columns: 1fr; border-bottom: 1px solid var(--border); }
+.article-tag { display: inline-block; font-size: 10px; font-weight: 600; color: var(--tag-color); background: var(--tag-bg); padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 7px; }
+.article-title { font-size: 14px; font-weight: 600; color: var(--text-bright); line-height: 1.4; margin-bottom: 5px; }
+.article-title:hover { color: var(--accent); }
+.article-summary { font-size: 12px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 10px; }
+.article-meta { display: flex; align-items: center; gap: 10px; }
+.author-avatar { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: white; flex-shrink: 0; }
+.author-name { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
+.author-role { font-size: 11px; color: var(--text-secondary); }
+.dot-sep { color: var(--border-light); font-size: 10px; }
+.read-time { font-size: 11px; color: var(--text-secondary); }
+
+/* EXPANDED ARTICLE */
+.article-expanded { padding: 20px; border-bottom: 1px solid var(--border); background: rgba(41,98,255,0.03); }
+.article-expanded .article-title { font-size: 17px; margin-bottom: 8px; }
+.article-expanded .article-summary { font-size: 13px; margin-bottom: 14px; }
+.article-body { font-size: 13px; color: var(--text-primary); line-height: 1.75; }
+.article-body p { margin-bottom: 13px; }
+.tutorial-header { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin: 18px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.step-row { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+.step-n { background: var(--accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.step-text { font-size: 12px; color: var(--text-primary); line-height: 1.65; }
+.step-text strong { color: var(--text-bright); display: block; font-size: 12px; margin-bottom: 3px; font-weight: 600; }
+.code-box { background: #0d1117; border: 1px solid var(--border); border-left: 2px solid var(--accent); padding: 12px 14px; border-radius: 0 4px 4px 0; font-family: 'Courier New', monospace; font-size: 11px; color: #7ec8a4; line-height: 1.65; margin: 10px 0; overflow-x: auto; white-space: pre-wrap; }
+.tip-box { background: rgba(41,98,255,0.07); border: 1px solid rgba(41,98,255,0.2); border-radius: 4px; padding: 10px 14px; font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin: 12px 0; }
+.tip-box strong { color: var(--accent); }
+
+/* SIDEBAR RIGHT */
+.sidebar-right { border-left: 1px solid var(--border); padding: 0; background: var(--bg-secondary); }
+.widget { border-bottom: 1px solid var(--border); padding: 14px 16px; }
+.widget-title { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+.trending-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.trending-item:last-child { border-bottom: none; }
+.trending-num { font-size: 16px; font-weight: 700; color: var(--border-light); width: 20px; flex-shrink: 0; line-height: 1.3; }
+.trending-title { font-size: 12px; color: var(--text-primary); line-height: 1.4; font-weight: 500; }
+.trending-title:hover { color: var(--accent); cursor: pointer; }
+.trending-meta { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
+.stat-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); }
+.stat-row:last-child { border-bottom: none; }
+.stat-label { font-size: 12px; color: var(--text-secondary); }
+.stat-val { font-size: 12px; font-weight: 600; color: var(--green); }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag-pill { background: var(--bg-tertiary); color: var(--text-secondary); font-size: 11px; padding: 4px 10px; border-radius: 12px; cursor: pointer; border: 1px solid var(--border-light); transition: all 0.15s; }
+.tag-pill:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar-left, .sidebar-right { display: none; }
+}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">CLAUDE <span>DAILY</span></div>
-  <div class="date">16 DE ABRIL, 2026</div>
-</header>
-
-<div class="hero">
-  <h2>Tutoriales &middot; Casos de Uso Practicos</h2>
-  <h1>Lo que la gente esta logrando con IA hoy</h1>
-  <p>Guias paso a paso escritas por usuarios reales sobre como integrar IA en su trabajo diario.</p>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">Claude <span>Daily</span></div>
+    <nav class="nav-links">
+      <a class="nav-link active" href="#">Tutoriales</a>
+      <a class="nav-link" href="#">Productividad</a>
+      <a class="nav-link" href="#">Desarrollo</a>
+      <a class="nav-link" href="#">Finanzas</a>
+    </nav>
+  </div>
+  <div class="topbar-right">
+    <span class="date-badge">Miercoles, 16 Abr 2026</span>
+  </div>
 </div>
 
-<div class="container">
-  <div class="section-title">Tutoriales de esta semana</div>
-  <div class="grid">
+<!-- MAIN LAYOUT -->
+<div class="layout">
 
-    <!-- ARTICULO 1 -->
-    <div class="card">
-      <div class="card-badge">Finanzas Personales</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <div class="avatar" style="background:#2d4a6e;">SO</div>
-          <div class="author-info">
-            <span class="author-name">Sofia Ormachea</span>
-            <span class="author-role">Contadora &middot; Buenos Aires</span>
-          </div>
+  <!-- SIDEBAR LEFT -->
+  <aside class="sidebar-left">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Categorias</div>
+      <div class="sidebar-item active">
+        <div class="sidebar-dot" style="background:#2962ff"></div>
+        Todos los tutoriales
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-dot" style="background:#26a69a"></div>
+        Productividad
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-dot" style="background:#f7a600"></div>
+        Finanzas
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-dot" style="background:#9c27b0"></div>
+        Desarrollo Web
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-dot" style="background:#ef5350"></div>
+        Escritura
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-dot" style="background:#00bcd4"></div>
+        Datos y Analisis
+      </div>
+    </div>
+    <div class="sidebar-section" style="margin-top:16px">
+      <div class="sidebar-label">Nivel</div>
+      <div class="sidebar-item">Principiante</div>
+      <div class="sidebar-item">Intermedio</div>
+      <div class="sidebar-item">Avanzado</div>
+    </div>
+    <div class="sidebar-section" style="margin-top:16px">
+      <div class="sidebar-label">Duracion</div>
+      <div class="sidebar-item">Menos de 5 min</div>
+      <div class="sidebar-item">5 - 15 min</div>
+      <div class="sidebar-item">Mas de 15 min</div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <div class="main-header">
+      <div class="main-title">Tutoriales practicos de IA</div>
+      <div class="tabs">
+        <div class="tab active">Todos</div>
+        <div class="tab">Mas leidos</div>
+        <div class="tab">Recientes</div>
+        <div class="tab">Principiante</div>
+      </div>
+    </div>
+
+    <div class="article-list">
+
+      <!-- ARTICULO 1 EXPANDIDO (featured) -->
+      <div class="article-expanded">
+        <div class="article-tag">Finanzas Personales</div>
+        <div class="article-title">Analice 6 meses de gastos en 10 minutos con IA</div>
+        <div class="article-summary">Exporte mis movimientos bancarios, los pase por Claude y obtuve categorias, alertas de gastos inusuales y proyecciones. Asi lo hice.</div>
+        <div class="article-meta" style="margin-bottom:16px">
+          <div class="author-avatar" style="background:#2d4a6e;">SO</div>
+          <span class="author-name">Sofia Ormachea</span>
+          <span class="dot-sep">·</span>
+          <span class="author-role">Contadora, Buenos Aires</span>
+          <span class="dot-sep">·</span>
+          <span class="read-time">5 min lectura</span>
         </div>
-        <div class="card-title">Analice 6 meses de gastos en 10 minutos con IA</div>
-        <div class="card-summary">Exporté mis movimientos bancarios, los pasé por Claude y obtuve un resumen por categorías, alertas de gastos inusuales y proyecciones para el mes siguiente. Así lo hice.</div>
-        <div class="card-text">
-          <p>Llevaba meses queriendo entender a donde se iba mi plata. Tenía los extractos del banco en PDF pero nunca me ponía a analizarlos. Un domingo a la tarde decidí probarlo con IA y el resultado me sorprendió.</p>
-          <p>El proceso completo me llevó menos de 15 minutos, incluyendo el tiempo de exportar los archivos. Lo que más me gustó fue que no solo me dio números sino que me explicó patrones: "tus gastos en delivery aumentaron 40% en marzo" o "hay tres suscripciones que no reconocés fácilmente por el nombre".</p>
+        <div class="article-body">
+          <p>Llevaba meses queriendo entender a donde se iba mi plata. Tenia los extractos del banco en PDF pero nunca me ponia a analizarlos. Un domingo a la tarde decidi probarlo con IA y el resultado me sorprendio.</p>
+          <p>El proceso completo me llevo menos de 15 minutos. Lo que mas me gusto fue que no solo me dio numeros sino que me explico patrones: "tus gastos en delivery aumentaron 40% en marzo" o "hay tres suscripciones que no reconoces facilmente por el nombre".</p>
 
-          <div class="tutorial-title">Como hacerlo paso a paso</div>
+          <div class="tutorial-header">Como hacerlo — paso a paso</div>
 
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-content">
-              <strong>Exportá tus movimientos</strong>
-              Desde el home banking bajá el extracto de los últimos 3-6 meses en formato CSV o Excel. La mayoría de los bancos lo tiene en "Descargar movimientos" o similar.
-            </div>
+          <div class="step-row">
+            <div class="step-n">1</div>
+            <div class="step-text"><strong>Exporta tus movimientos</strong>Desde el home banking baja el extracto de los ultimos 3-6 meses en CSV o Excel. La mayoria de los bancos lo tiene en "Descargar movimientos".</div>
           </div>
-
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-content">
-              <strong>Subí el archivo y escribí este prompt</strong>
-              Adjuntá el CSV directamente en el chat y usá este mensaje:
-            </div>
+          <div class="step-row">
+            <div class="step-n">2</div>
+            <div class="step-text"><strong>Sube el archivo y usa este prompt</strong>Adjunta el CSV directamente en el chat:</div>
           </div>
-
-          <div class="code-block">Analizá estos movimientos bancarios. Necesito:
-1. Categorías de gastos (comida, transporte, suscripciones, etc.)
-2. Top 5 de donde más gasto
-3. Comparación por mes
+          <div class="code-box">Analiza estos movimientos bancarios. Necesito:
+1. Categorias de gastos (comida, transporte, suscripciones, etc.)
+2. Top 5 de donde mas gasto
+3. Comparacion por mes
 4. Gastos que parecen inusuales o duplicados
-5. Proyección aproximada del próximo mes
-
-Presentá todo de forma clara, sin tecnicismos.</div>
-
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-content">
-              <strong>Pedí el desglose por categoría</strong>
-              Después del primer análisis, preguntá específicamente por lo que más te llama la atención: "¿Cuánto gasté en suscripciones? ¿Cuáles son?"
-            </div>
+5. Proyeccion aproximada del proximo mes
+Presenta todo de forma clara, sin tecnicismos.</div>
+          <div class="step-row">
+            <div class="step-n">3</div>
+            <div class="step-text"><strong>Pide el desglose por categoria</strong>Despues del primer analisis, pregunta especificamente: "Cuanto gaste en suscripciones? Cuales son?"</div>
           </div>
-
-          <div class="step">
-            <div class="step-num">4</div>
-            <div class="step-content">
-              <strong>Pedí un presupuesto sugerido</strong>
-              Con los datos en contexto, escribí: "En base a mis gastos históricos, armame un presupuesto realista para el próximo mes con un objetivo de ahorro del 15%."
-            </div>
+          <div class="step-row">
+            <div class="step-n">4</div>
+            <div class="step-text"><strong>Pide un presupuesto sugerido</strong>Con los datos en contexto: "En base a mis gastos historicos, armame un presupuesto realista para el proximo mes con un objetivo de ahorro del 15%."</div>
           </div>
-
-          <div class="tip"><strong>Tip de privacidad:</strong> Si querés mayor privacidad, reemplazá los nombres de comercios por categorías antes de subir el archivo. El análisis funciona igual.</div>
-
-          <p>El resultado fue un Google Doc completo con gráficos de torta, tabla de categorías y tres recomendaciones concretas. Lo que antes me llevaba un fin de semana, ahora son 10 minutos.</p>
+          <div class="tip-box"><strong>Tip de privacidad:</strong> Si queres mayor privacidad, reemplaza los nombres de comercios por categorias antes de subir el archivo. El analisis funciona igual.</div>
         </div>
-        <div class="read-time">5 min de lectura &middot; Nivel: principiante</div>
       </div>
-    </div>
 
-    <!-- ARTICULO 2 -->
-    <div class="card">
-      <div class="card-badge">Desarrollo Web</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <div class="avatar" style="background:#2d6e4a;">LV</div>
-          <div class="author-info">
+      <!-- ARTICULO 2 COMPACTO -->
+      <div class="article-card">
+        <div>
+          <div class="article-tag">Desarrollo Web</div>
+          <div class="article-title">Arme mi portfolio profesional desde cero sin saber programar</div>
+          <div class="article-summary">Soy disenador, no programador. Con IA como copiloto construi un sitio web completo en una tarde, con animaciones y formulario de contacto funcional.</div>
+          <div class="article-meta">
+            <div class="author-avatar" style="background:#2d6e4a;">LV</div>
             <span class="author-name">Lucas Valderrama</span>
-            <span class="author-role">Diseñador UX &middot; Medellin</span>
+            <span class="dot-sep">·</span>
+            <span class="author-role">Disenador UX, Medellin</span>
+            <span class="dot-sep">·</span>
+            <span class="read-time">7 min</span>
           </div>
         </div>
-        <div class="card-title">Arme mi portfolio profesional desde cero sin saber programar</div>
-        <div class="card-summary">Soy diseñador, no programador. Usando IA como co-piloto construí un sitio web completo en una tarde, con animaciones y formulario de contacto funcional.</div>
-        <div class="card-text">
-          <p>Siempre tuve excusas para no tener portfolio propio: no sé HTML, no sé hostear, no tengo tiempo. En un sábado libre decidí que era ahora o nunca, y con IA como copiloto lo terminé antes de la cena.</p>
-          <p>La clave es no pedirle que "haga todo solo" sino trabajar en iteraciones cortas. Primero la estructura, después el diseño, después cada sección. Así mantenés el control sin necesitar conocimiento técnico.</p>
-
-          <div class="tutorial-title">El proceso que use</div>
-
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-content">
-              <strong>Definí la estructura primero</strong>
-              Antes de pedir código, describí en palabras lo que quería: "Necesito un portfolio con: header con mi nombre y foto, sección de proyectos en grilla, sobre mí y formulario de contacto."
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-content">
-              <strong>Pedí el HTML base con este prompt</strong>
-            </div>
-          </div>
-
-          <div class="code-block">Crea un portfolio web en un solo archivo HTML+CSS+JS.
-Estilo: minimalista, oscuro, tipografía moderna.
-Secciones: hero con nombre y tagline, proyectos en grid 3 columnas con hover effect, about con foto placeholder, contacto con formulario.
-Que sea responsive y se vea bien en celular.
-No uses frameworks externos, solo vanilla CSS.</div>
-
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-content">
-              <strong>Iterá por partes</strong>
-              Una vez que tuve el esqueleto, fui ajustando sección por sección: "Cambiá los colores a esta paleta: #0a0a0a, #e63946, #f0f0f0" o "Agregá una animación de entrada al hacer scroll en los proyectos".
-            </div>
-          </div>
-
-          <div class="step">
-            <div class="step-num">4</div>
-            <div class="step-content">
-              <strong>Subilo gratis con GitHub Pages</strong>
-              Creá una cuenta en github.com, subí el archivo index.html a un repositorio nuevo y activá Pages en Settings. Tu URL queda lista en minutos.
-            </div>
-          </div>
-
-          <div class="tip"><strong>Pro tip:</strong> Pedile que genere el HTML con comentarios explicando cada sección. Así podés editarlo vos mismo después sin perderte.</div>
-
-          <p>Mi portfolio hoy tiene más visitas que los de compañeros que contrataron a un desarrollador. Y si quiero cambiar algo, en 2 minutos está listo.</p>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
+          <span style="font-size:11px;color:var(--text-secondary)">Principiante</span>
+          <span style="font-size:11px;background:rgba(38,166,154,0.12);color:#26a69a;padding:3px 8px;border-radius:3px;">Destacado</span>
         </div>
-        <div class="read-time">7 min de lectura &middot; Nivel: principiante</div>
       </div>
-    </div>
 
-    <!-- ARTICULO 3 -->
-    <div class="card">
-      <div class="card-badge">Productividad</div>
-      <div class="card-body">
-        <div class="card-meta">
-          <div class="avatar" style="background:#6e4a2d;">MR</div>
-          <div class="author-info">
+      <!-- ARTICULO 2 EXPANDIDO -->
+      <div style="padding:0 20px 20px;background:rgba(41,98,255,0.02);border-bottom:1px solid var(--border)">
+        <div class="article-body" style="padding-top:16px">
+          <p>Siempre tuve excusas para no tener portfolio propio: no se HTML, no se hostear, no tengo tiempo. En un sabado libre decidi que era ahora o nunca, y con IA como copiloto lo termine antes de la cena.</p>
+          <p>La clave es no pedirle que "haga todo solo" sino trabajar en iteraciones cortas. Primero la estructura, despues el diseno, despues cada seccion.</p>
+          <div class="tutorial-header">El proceso que use</div>
+          <div class="step-row">
+            <div class="step-n">1</div>
+            <div class="step-text"><strong>Define la estructura primero</strong>Describe en palabras lo que queres: "Necesito un portfolio con: header con mi nombre, seccion de proyectos en grilla, sobre mi y formulario de contacto."</div>
+          </div>
+          <div class="step-row">
+            <div class="step-n">2</div>
+            <div class="step-text"><strong>Pide el HTML base</strong></div>
+          </div>
+          <div class="code-box">Crea un portfolio web en un solo archivo HTML+CSS+JS.
+Estilo: minimalista, oscuro, tipografia moderna.
+Secciones: hero con nombre y tagline, proyectos en grid 3 columnas con hover effect, about con foto placeholder, contacto con formulario.
+Que sea responsive. No uses frameworks externos, solo vanilla CSS.</div>
+          <div class="step-row">
+            <div class="step-n">3</div>
+            <div class="step-text"><strong>Itera por partes</strong>Una vez con el esqueleto, ajusta seccion por seccion: "Cambia los colores a esta paleta: #0a0a0a, #2962ff, #f0f0f0"</div>
+          </div>
+          <div class="step-row">
+            <div class="step-n">4</div>
+            <div class="step-text"><strong>Subilo gratis con GitHub Pages</strong>Crea cuenta en github.com, sube el archivo index.html y activa Pages en Settings. Tu URL queda lista en minutos.</div>
+          </div>
+          <div class="tip-box"><strong>Pro tip:</strong> Pide que genere el HTML con comentarios explicando cada seccion. Asi podes editarlo vos mismo despues sin perderte.</div>
+        </div>
+      </div>
+
+      <!-- ARTICULO 3 COMPACTO -->
+      <div class="article-card">
+        <div>
+          <div class="article-tag">Productividad</div>
+          <div class="article-title">Como uso IA para preparar y resumir reuniones en menos de 5 minutos</div>
+          <div class="article-summary">Antes tardaba una hora preparando cada reunion. Ahora tengo un sistema de prompts que me da agenda, preguntas clave y resumen completo.</div>
+          <div class="article-meta">
+            <div class="author-avatar" style="background:#6e4a2d;">MR</div>
             <span class="author-name">Mariana Rios</span>
-            <span class="author-role">Project Manager &middot; Ciudad de Mexico</span>
+            <span class="dot-sep">·</span>
+            <span class="author-role">Project Manager, Ciudad de Mexico</span>
+            <span class="dot-sep">·</span>
+            <span class="read-time">6 min</span>
           </div>
         </div>
-        <div class="card-title">Como uso IA para preparar y resumir reuniones en menos de 5 minutos</div>
-        <div class="card-summary">Antes tardaba una hora preparando cada reunión importante. Ahora tengo un sistema de prompts que me da agenda, preguntas clave y resumen en minutos.</div>
-        <div class="card-text">
-          <p>Como PM tengo entre 4 y 6 reuniones por día. La preparación me consumía horas cada semana: revisar contexto, armar agenda, preparar preguntas, tomar notas y escribir el follow-up. Ahora tengo un sistema que me lleva 5 minutos en total.</p>
-          <p>El truco está en tener prompts guardados y reusables. No improviso cada vez: tengo tres plantillas que adapto según el tipo de reunión.</p>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0">
+          <span style="font-size:11px;color:var(--text-secondary)">Principiante</span>
+        </div>
+      </div>
 
-          <div class="tutorial-title">Mis 3 prompts que uso cada dia</div>
-
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-content">
-              <strong>Prompt de preparacion (antes de la reunion)</strong>
-              Pegá el contexto relevante (emails, documentos, notas previas) y usá esto:
-            </div>
+      <!-- ARTICULO 3 EXPANDIDO -->
+      <div style="padding:0 20px 20px;background:rgba(41,98,255,0.02);border-bottom:1px solid var(--border)">
+        <div class="article-body" style="padding-top:16px">
+          <p>Como PM tengo entre 4 y 6 reuniones por dia. La preparacion me consumia horas cada semana. Ahora tengo un sistema que me lleva 5 minutos en total.</p>
+          <div class="tutorial-header">Mis 3 prompts que uso cada dia</div>
+          <div class="step-row">
+            <div class="step-n">1</div>
+            <div class="step-text"><strong>Prompt de preparacion (antes de la reunion)</strong></div>
           </div>
-
-          <div class="code-block">Tengo una reunion en 30 minutos con [nombre/rol].
+          <div class="code-box">Tengo una reunion en 30 minutos con [nombre/rol].
 Contexto: [pegar emails o notas relevantes]
-Objetivo de la reunion: [describir en 1 linea]
+Objetivo: [describir en 1 linea]
 
 Dame:
-- Agenda sugerida con tiempos (reunion de X minutos)
+- Agenda sugerida con tiempos
 - 5 preguntas clave que debo hacer
 - Posibles objeciones y como responderlas
 - Que necesito tener listo antes de entrar</div>
-
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-content">
-              <strong>Prompt de resumen (despues de la reunion)</strong>
-              Grabá la reunión con cualquier app (Otter, Zoom, incluso el dictado del celular) y pegá la transcripción:
-            </div>
+          <div class="step-row">
+            <div class="step-n">2</div>
+            <div class="step-text"><strong>Prompt de resumen (despues de la reunion)</strong>Graba la reunion con cualquier app (Otter, Zoom) y pega la transcripcion:</div>
           </div>
-
-          <div class="code-block">Esta es la transcripcion de mi reunion de hoy:
+          <div class="code-box">Esta es la transcripcion de mi reunion:
 [pegar transcripcion]
 
 Necesito:
 - Resumen ejecutivo en 3 puntos
 - Decisiones tomadas
 - Action items con responsable y fecha
-- Temas que quedaron pendientes para proxima reunion
-Formato: lista clara, sin texto de relleno.</div>
-
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-content">
-              <strong>Prompt de follow-up (email post-reunion)</strong>
-            </div>
+- Temas pendientes para proxima reunion</div>
+          <div class="step-row">
+            <div class="step-n">3</div>
+            <div class="step-text"><strong>Prompt de follow-up (email post-reunion)</strong></div>
           </div>
-
-          <div class="code-block">En base a este resumen de reunion, escribi un email de follow-up profesional para enviar a los participantes.
-Debe incluir: agradecimiento breve, decisiones clave, proximos pasos con fechas y responsables.
+          <div class="code-box">Escribi un email de follow-up profesional basado en este resumen.
+Incluir: agradecimiento breve, decisiones clave, proximos pasos con fechas.
 Tono: formal pero directo. Maximo 200 palabras.</div>
-
-          <div class="tip"><strong>Tip de flujo:</strong> Guardá estos prompts en una nota o doc. Copiar y pegar tarda 30 segundos. En una semana recuperás horas.</div>
-
-          <p>Desde que implementé este sistema, mis reuniones tienen mejor seguimiento y los action items se cumplen más. Mi jefe me preguntó qué había cambiado.</p>
+          <div class="tip-box"><strong>Tip de flujo:</strong> Guarda estos prompts en una nota. Copiar y pegar tarda 30 segundos. En una semana recuperas horas.</div>
         </div>
-        <div class="read-time">6 min de lectura &middot; Nivel: principiante</div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- SIDEBAR RIGHT -->
+  <aside class="sidebar-right">
+    <div class="widget">
+      <div class="widget-title">Tendencias</div>
+      <div class="trending-item">
+        <div class="trending-num">1</div>
+        <div>
+          <div class="trending-title">Automatizar reportes financieros con IA</div>
+          <div class="trending-meta">Finanzas &middot; 2.4k lecturas</div>
+        </div>
+      </div>
+      <div class="trending-item">
+        <div class="trending-num">2</div>
+        <div>
+          <div class="trending-title">Generar contenido para redes en segundos</div>
+          <div class="trending-meta">Marketing &middot; 1.8k lecturas</div>
+        </div>
+      </div>
+      <div class="trending-item">
+        <div class="trending-num">3</div>
+        <div>
+          <div class="trending-title">Revisar y mejorar codigo con IA</div>
+          <div class="trending-meta">Desarrollo &middot; 1.5k lecturas</div>
+        </div>
+      </div>
+      <div class="trending-item">
+        <div class="trending-num">4</div>
+        <div>
+          <div class="trending-title">Redactar contratos y documentos legales</div>
+          <div class="trending-meta">Legal &middot; 1.1k lecturas</div>
+        </div>
+      </div>
+      <div class="trending-item">
+        <div class="trending-num">5</div>
+        <div>
+          <div class="trending-title">Traduccion y localizacion de contenido</div>
+          <div class="trending-meta">Idiomas &middot; 980 lecturas</div>
+        </div>
       </div>
     </div>
 
-  </div>
-</div>
+    <div class="widget">
+      <div class="widget-title">Estadisticas del dia</div>
+      <div class="stat-row"><span class="stat-label">Tutoriales publicados</span><span class="stat-val">3</span></div>
+      <div class="stat-row"><span class="stat-label">Prompts compartidos</span><span class="stat-val">9</span></div>
+      <div class="stat-row"><span class="stat-label">Tiempo promedio ahorrado</span><span class="stat-val" style="color:#f7a600">4.2h</span></div>
+      <div class="stat-row"><span class="stat-label">Nivel promedio</span><span class="stat-val" style="color:#26a69a">Principiante</span></div>
+    </div>
 
-<footer>
-  <p>Claude Daily &nbsp;&middot;&nbsp; Tutoriales practicos cada dia &nbsp;&middot;&nbsp; <a href="https://www.anthropic.com" target="_blank">anthropic.com</a></p>
-</footer>
+    <div class="widget">
+      <div class="widget-title">Temas populares</div>
+      <div class="tag-cloud">
+        <span class="tag-pill">Prompts</span>
+        <span class="tag-pill">Automatizacion</span>
+        <span class="tag-pill">Excel</span>
+        <span class="tag-pill">Codigo</span>
+        <span class="tag-pill">Reuniones</span>
+        <span class="tag-pill">Escritura</span>
+        <span class="tag-pill">Emails</span>
+        <span class="tag-pill">Finanzas</span>
+        <span class="tag-pill">Datos</span>
+        <span class="tag-pill">Portfolio</span>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title">Autores destacados</div>
+      <div class="trending-item">
+        <div class="author-avatar" style="background:#2d4a6e;width:28px;height:28px;font-size:10px;">SO</div>
+        <div>
+          <div class="trending-title">Sofia Ormachea</div>
+          <div class="trending-meta">Contadora &middot; 1 tutorial</div>
+        </div>
+      </div>
+      <div class="trending-item">
+        <div class="author-avatar" style="background:#2d6e4a;width:28px;height:28px;font-size:10px;">LV</div>
+        <div>
+          <div class="trending-title">Lucas Valderrama</div>
+          <div class="trending-meta">Disenador UX &middot; 1 tutorial</div>
+        </div>
+      </div>
+      <div class="trending-item">
+        <div class="author-avatar" style="background:#6e4a2d;width:28px;height:28px;font-size:10px;">MR</div>
+        <div>
+          <div class="trending-title">Mariana Rios</div>
+          <div class="trending-meta">Project Manager &middot; 1 tutorial</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+</div>
 
 </body>
 </html>
