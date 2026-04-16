@@ -154,6 +154,22 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
 .related-t:hover { color:var(--accent); }
 .progress-bar { height:2px; background:var(--border); margin-bottom:20px; border-radius:1px; }
 .progress-fill { height:100%; background:var(--accent); border-radius:1px; width:0%; transition:width .3s; }
+
+/* ── IMAGES ── */
+.feat-img { width:100%; height:220px; overflow:hidden; border-radius:6px; margin-bottom:16px; }
+.feat-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
+.featured:hover .feat-img img { transform:scale(1.02); }
+.card-img { width:calc(100% + 28px); height:140px; overflow:hidden; border-radius:5px 5px 0 0; margin:-14px -14px 12px -14px; }
+.card-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
+.article-card-home:hover .card-img img { transform:scale(1.04); }
+.art-list-thumb { width:100px; height:72px; border-radius:5px; overflow:hidden; flex-shrink:0; }
+.art-list-thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
+.art-list-item:hover .art-list-thumb img { transform:scale(1.05); }
+.ap-cover { width:100%; height:320px; overflow:hidden; border-radius:6px; margin-bottom:28px; }
+.ap-cover img { width:100%; height:100%; object-fit:cover; display:block; }
+.art-img { margin:24px 0 0; border-radius:6px; overflow:hidden; }
+.art-img img { width:100%; height:200px; object-fit:cover; display:block; }
+.art-img figcaption { font-size:11px; color:var(--text2); padding:7px 0 18px; font-style:italic; line-height:1.5; border-bottom:1px solid var(--border); margin-bottom:4px; }
 </style>
 </head>
 <body>
@@ -207,6 +223,7 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
 
       <!-- ARTICULO FEATURED -->
       <div class="featured" onclick="openArticle(0)">
+        <div class="feat-img"><img src="https://picsum.photos/seed/banking/900/220" alt="Analisis de gastos con IA" loading="lazy"></div>
         <div class="feat-eyebrow">Tutorial del dia</div>
         <div class="feat-tag">Finanzas Personales</div>
         <div class="feat-title">Analice 6 meses de gastos en 10 minutos usando IA</div>
@@ -229,6 +246,7 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
       </div>
       <div class="article-grid">
         <div class="article-card-home" onclick="openArticle(1)">
+          <div class="card-img"><img src="https://picsum.photos/seed/laptop42/400/140" alt="" loading="lazy"></div>
           <div class="card-tag">Desarrollo Web</div>
           <div class="card-title">Arme mi portfolio profesional desde cero sin saber programar</div>
           <div class="card-excerpt">Soy disenador, no programador. Con IA como copiloto construi un sitio web completo en una tarde, con animaciones y formulario de contacto funcional.</div>
@@ -239,6 +257,7 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
           </div>
         </div>
         <div class="article-card-home" onclick="openArticle(2)">
+          <div class="card-img"><img src="https://picsum.photos/seed/meeting77/400/140" alt="" loading="lazy"></div>
           <div class="card-tag">Productividad</div>
           <div class="card-title">Como preparo y resumo mis reuniones en menos de 5 minutos</div>
           <div class="card-excerpt">Como PM con 6 reuniones diarias, tenia un problema. Ahora tengo un sistema de 3 prompts que me da agenda, preguntas clave y follow-up automatico.</div>
@@ -266,6 +285,7 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
             </div>
           </div>
           <div class="art-list-right">
+            <div class="art-list-thumb"><img src="https://picsum.photos/seed/business55/100/72" alt="" loading="lazy"></div>
             <span class="level-badge" style="background:rgba(247,166,0,.12);color:#f7a600">Intermedio</span>
           </div>
         </div>
@@ -282,6 +302,7 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
             </div>
           </div>
           <div class="art-list-right">
+            <div class="art-list-thumb"><img src="https://picsum.photos/seed/dataviz88/100/72" alt="" loading="lazy"></div>
             <span class="level-badge" style="background:rgba(247,166,0,.12);color:#f7a600">Intermedio</span>
           </div>
         </div>
@@ -298,6 +319,7 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
             </div>
           </div>
           <div class="art-list-right">
+            <div class="art-list-thumb"><img src="https://picsum.photos/seed/clients99/100/72" alt="" loading="lazy"></div>
             <span class="level-badge" style="background:rgba(38,166,154,.12);color:#26a69a">Principiante</span>
           </div>
         </div>
@@ -377,9 +399,11 @@ const articles = [
     summary: 'Exporte los movimientos de mi banco, los paste en Claude y en menos de un cuarto de hora tenia un analisis completo por categorias, alertas de gastos inusuales y proyecciones para el mes siguiente.',
     author: 'Sofia Ormachea', role: 'Contadora, Buenos Aires', initials: 'SO', avatarBg: '#2d4a6e',
     readTime: '5 min', level: 'Principiante', cat: 'finanzas',
+    cover: 'https://picsum.photos/seed/banking/900/320',
     body: `
       <p>Llevaba meses queriendo entender a donde se iba mi plata. Tenia los extractos del banco en PDF pero nunca me ponia a analizarlos en serio. Un domingo a la tarde decidi probarlo con IA y el resultado me sorprendio.</p>
       <p>El proceso completo me llevo menos de 15 minutos, incluyendo el tiempo de exportar los archivos. Lo que mas me gusto fue que no solo me dio numeros sino que me explico patrones: "tus gastos en delivery aumentaron 40% en marzo" o "hay tres suscripciones que no reconoces facilmente por el nombre del cobro".</p>
+      <figure class="art-img"><img src="https://picsum.photos/seed/spreadsheet11/700/200" loading="lazy"><figcaption>Exportar el historial bancario en CSV o Excel es el primer paso. La mayoria de los bancos lo permite desde la seccion "Movimientos" del home banking.</figcaption></figure>
       <h3>Como hacerlo — paso a paso</h3>
       <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Exporta tus movimientos</strong>Desde el home banking baja el extracto de los ultimos 3-6 meses en formato CSV o Excel. La mayoria de los bancos lo tiene en "Descargar movimientos" o "Exportar historial".</div></div>
       <div class="step-row"><div class="step-n">2</div><div class="step-text"><strong>Sube el archivo y usa este prompt</strong>Adjunta el CSV directamente en el chat y escribi esto:</div></div>
@@ -393,6 +417,7 @@ Presenta todo de forma clara, sin tecnicismos.</div>
       <div class="step-row"><div class="step-n">3</div><div class="step-text"><strong>Pide el desglose por categoria</strong>Despues del primer analisis, profundiza: "Cuanto gaste en suscripciones en total? Cuales son y cuanto cuesta cada una?"</div></div>
       <div class="step-row"><div class="step-n">4</div><div class="step-text"><strong>Pide un presupuesto realista</strong>Con todos los datos en contexto: "En base a mis gastos historicos, armame un presupuesto para el proximo mes con un objetivo de ahorro del 15%."</div></div>
       <div class="step-row"><div class="step-n">5</div><div class="step-text"><strong>Exporta el resumen</strong>Pide que genere el resumen en formato tabla. Podes copiar y pegar en Excel o Google Sheets para tener un registro.</div></div>
+      <figure class="art-img"><img src="https://picsum.photos/seed/budget22/700/200" loading="lazy"><figcaption>El analisis por categorias permite identificar rapidamente donde se escapa el dinero mes a mes y comparar tendencias entre periodos.</figcaption></figure>
       <div class="tip-box"><strong>Tip de privacidad:</strong> Si queres mayor privacidad, reemplaza los nombres de comercios por categorias antes de subir el archivo. El analisis funciona exactamente igual.</div>
       <p>El resultado fue un analisis completo con tabla por categorias, comparacion mensual y tres recomendaciones concretas. Lo que antes me llevaba un fin de semana, ahora son 10 minutos.</p>
     `
@@ -405,9 +430,11 @@ Presenta todo de forma clara, sin tecnicismos.</div>
     summary: 'Soy disenador UX, no programador. Con IA como copiloto construi un sitio web completo en una tarde, con animaciones, diseno responsive y formulario de contacto funcional.',
     author: 'Lucas Valderrama', role: 'Disenador UX, Medellin', initials: 'LV', avatarBg: '#2d6e4a',
     readTime: '7 min', level: 'Principiante', cat: 'desarrollo',
+    cover: 'https://picsum.photos/seed/laptop42/900/320',
     body: `
       <p>Siempre tuve excusas para no tener portfolio propio: no se HTML, no se hostear, no tengo tiempo. En un sabado libre decidi que era ahora o nunca, y con IA como copiloto lo termine antes de la cena.</p>
       <p>La clave es no pedirle que "haga todo solo" sino trabajar en iteraciones cortas. Primero la estructura, despues el diseno, despues cada seccion. Asi mantenes el control sin necesitar conocimiento tecnico.</p>
+      <figure class="art-img"><img src="https://picsum.photos/seed/webdev33/700/200" loading="lazy"><figcaption>Un portfolio profesional no requiere conocimientos de programacion. Con las herramientas de IA actuales, el diseño y el codigo se generan en paralelo.</figcaption></figure>
       <h3>El proceso que use</h3>
       <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Define la estructura primero (en palabras)</strong>Antes de pedir codigo, describe lo que queres: "Necesito un portfolio con: header con mi nombre y foto, seccion de proyectos en grilla, pagina sobre mi y formulario de contacto."</div></div>
       <div class="step-row"><div class="step-n">2</div><div class="step-text"><strong>Pide el HTML base con este prompt</strong></div></div>
@@ -422,6 +449,7 @@ Que sea responsive (mobile-first). Sin frameworks externos.</div>
       <div class="step-row"><div class="step-n">3</div><div class="step-text"><strong>Itera por secciones</strong>Una vez que tenes el esqueleto, ajusta de a una cosa: "Cambia los colores a esta paleta: primario #2962ff, fondo #0a0a0a, texto #f0f0f0" o "Agrega una animacion de fade-in al hacer scroll en los proyectos".</div></div>
       <div class="step-row"><div class="step-n">4</div><div class="step-text"><strong>Agrega tu contenido real</strong>Pide: "Ayudame a reemplazar el contenido placeholder con mi informacion real. Estos son mis proyectos: [describir]. Este es mi perfil: [describir]."</div></div>
       <div class="step-row"><div class="step-n">5</div><div class="step-text"><strong>Publicalo gratis con GitHub Pages</strong>Crea cuenta en github.com, sube el archivo index.html a un repositorio nuevo llamado "tunombre.github.io" y activa Pages en Settings. Tu URL queda lista en minutos, sin pagar hosting.</div></div>
+      <figure class="art-img"><img src="https://picsum.photos/seed/responsive44/700/200" loading="lazy"><figcaption>El diseno responsive garantiza que el portfolio se vea bien en cualquier dispositivo, desde el celular hasta una pantalla de escritorio.</figcaption></figure>
       <div class="tip-box"><strong>Pro tip:</strong> Pide que genere el HTML con comentarios explicando cada seccion. Asi podes editarlo vos mismo despues sin perderte en el codigo.</div>
       <p>Mi portfolio hoy tiene mas visitas que los de companeros que contrataron a un desarrollador. Y si quiero cambiar algo, en 2 minutos esta listo.</p>
     `
@@ -434,9 +462,11 @@ Que sea responsive (mobile-first). Sin frameworks externos.</div>
     summary: 'Como PM con 6 reuniones diarias, la preparacion me consumia horas. Ahora tengo un sistema de 3 prompts que me da agenda, preguntas clave y follow-up automatico.',
     author: 'Mariana Rios', role: 'Project Manager, Ciudad de Mexico', initials: 'MR', avatarBg: '#6e4a2d',
     readTime: '6 min', level: 'Principiante', cat: 'productividad',
+    cover: 'https://picsum.photos/seed/meeting77/900/320',
     body: `
       <p>Como PM tengo entre 4 y 6 reuniones por dia. La preparacion me consumia horas cada semana: revisar contexto, armar agenda, preparar preguntas, tomar notas y escribir el follow-up. Ahora tengo un sistema que me lleva 5 minutos en total.</p>
       <p>El truco esta en tener prompts guardados y reusables. No improviso cada vez: tengo tres plantillas que adapto segun el tipo de reunion.</p>
+      <figure class="art-img"><img src="https://picsum.photos/seed/office55/700/200" loading="lazy"><figcaption>Un sistema de prompts bien diseñado convierte horas de preparacion en minutos, sin perder calidad en el seguimiento.</figcaption></figure>
       <h3>Mis 3 prompts esenciales</h3>
       <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Antes de la reunion: preparacion</strong>Pega el contexto (emails, notas previas) y usa esto:</div></div>
       <div class="code-box">Tengo una reunion en 30 minutos con [nombre/rol].
@@ -468,6 +498,7 @@ Mi posicion: [describir]
 Lo que quiero lograr: [objetivo]
 
 Ayudame a: anticipar los argumentos del otro lado, preparar mis contraargumentos y definir mis limites (que si acepto, que no).</div>
+      <figure class="art-img"><img src="https://picsum.photos/seed/notes66/700/200" loading="lazy"><figcaption>Las transcripciones de Otter, Zoom o el dictado del celular son el insumo perfecto para generar resumenes ejecutivos y action items automaticamente.</figcaption></figure>
       <div class="tip-box"><strong>Tip de flujo:</strong> Guarda estos prompts en una nota de Notion o Apple Notes. Copiar y pegar tarda 30 segundos. En una semana recuperas mas de 3 horas.</div>
       <p>Desde que implemente este sistema, mis reuniones tienen mejor seguimiento y los action items se cumplen mas. Mi jefe me pregunto que habia cambiado.</p>
     `
@@ -480,9 +511,11 @@ Ayudame a: anticipar los argumentos del otro lado, preparar mis contraargumentos
     summary: 'Tenia la idea pero no el tiempo ni las palabras. Usando IA como co-redactor, estructure, desarrolle y pulie el documento completo en una sola sesion.',
     author: 'Joaquin Pereyra', role: 'Emprendedor, Rosario', initials: 'JP', avatarBg: '#5a2d7e',
     readTime: '8 min', level: 'Intermedio', cat: 'escritura',
+    cover: 'https://picsum.photos/seed/business55/900/320',
     body: `
       <p>Hace tres meses tenia una idea clara para un negocio de logistica urbana pero cada vez que me sentaba a escribir el plan, me bloqueaba. La hoja en blanco es real. Decidi intentarlo con IA como copiloto y el resultado cambio todo.</p>
       <p>No le pedi que "escriba mi plan de negocios" — eso produce algo generico y sin caracter. Lo use como estructurador primero, luego como redactor de secciones especificas, y finalmente como critico para mejorar el resultado.</p>
+      <figure class="art-img"><img src="https://picsum.photos/seed/writing77/700/200" loading="lazy"><figcaption>La hoja en blanco deja de ser un obstaculo cuando se trabaja con IA como co-redactor: primero la estructura, luego el contenido seccion por seccion.</figcaption></figure>
       <h3>El flujo en 4 pasos</h3>
       <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Estructura primero</strong>Antes de escribir una sola palabra, pide el indice:</div></div>
       <div class="code-box">Voy a escribir un plan de negocios para [descripcion de tu idea en 2-3 oraciones].
@@ -502,6 +535,7 @@ Tono: profesional pero directo. Longitud: 3-4 parrafos densos.</div>
 - Que preguntas me harias en una presentacion?
 - Que secciones necesitan mas sustento?
 Se critico y especifico.</div>
+      <figure class="art-img"><img src="https://picsum.photos/seed/strategy88/700/200" loading="lazy"><figcaption>Desarrollar el plan seccion por seccion, con critica iterativa al final, produce un documento mas solido que escribirlo de corrido.</figcaption></figure>
       <div class="tip-box"><strong>Importante:</strong> La IA genera la estructura y el lenguaje, pero los numeros, el conocimiento del mercado y la vision tienen que ser tuyos. Un buen plan de negocios se reconoce por su especificidad, no por su largo.</div>
     `
   },
@@ -513,9 +547,11 @@ Se critico y especifico.</div>
     summary: 'Tenia tres meses de datos de ventas en un Excel desordenado. Le pedi a la IA que los limpiara, agrupara y generara visualizaciones. El resultado fue mejor de lo esperado.',
     author: 'Carolina Villalba', role: 'Comercial, Santiago de Chile', initials: 'CV', avatarBg: '#1a5276',
     readTime: '10 min', level: 'Intermedio', cat: 'datos',
+    cover: 'https://picsum.photos/seed/dataviz88/900/320',
     body: `
       <p>Trabajo como responsable comercial en una PYME y cada fin de mes tenia el mismo problema: un Excel con miles de filas de transacciones y la necesidad de presentar un resumen ejecutivo al directorio. El proceso manual me llevaba medio dia.</p>
       <p>Decidi probar usando IA para todo el pipeline: limpieza, agrupacion, analisis y generacion del informe. Funciono mejor de lo que esperaba.</p>
+      <figure class="art-img"><img src="https://picsum.photos/seed/excel99/700/200" loading="lazy"><figcaption>Un Excel con miles de filas desordenadas puede convertirse en un dashboard ejecutivo limpio en menos de 20 minutos usando IA como analista.</figcaption></figure>
       <h3>El proceso completo</h3>
       <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Limpia el Excel primero</strong>Antes de analizar, pide que identifique y corrija problemas:</div></div>
       <div class="code-box">Tengo este archivo Excel con datos de ventas. Antes de analizar, ayudame a:
@@ -543,6 +579,7 @@ Que el output sea un archivo HTML interactivo.</div>
       <div class="code-box">Con base en este analisis, escribe el informe ejecutivo de ventas del trimestre para presentar al directorio.
 Formato: introduccion (1 parrafo), resultados clave (bullets), analisis (2-3 parrafos), recomendaciones (3 acciones concretas).
 Tono: profesional y directo. Sin jerga tecnica.</div>
+      <figure class="art-img"><img src="https://picsum.photos/seed/analytics110/700/200" loading="lazy"><figcaption>Los graficos generados automaticamente facilitan la presentacion al directorio: de datos crudos a visualizaciones claras sin tocar una sola formula.</figcaption></figure>
       <div class="tip-box"><strong>Tip avanzado:</strong> Si usas Google Sheets, podes conectar directamente via Apps Script y automatizar el proceso mensual sin volver a hacerlo manualmente.</div>
     `
   },
@@ -554,9 +591,11 @@ Tono: profesional y directo. Sin jerga tecnica.</div>
     summary: 'Tenia 40 clientes y ningun CRM. Empece a usar IA para registrar interacciones, generar recordatorios y redactar emails de seguimiento.',
     author: 'Agustina Ramos', role: 'Consultora independiente, Montevideo', initials: 'AR', avatarBg: '#1a6b3a',
     readTime: '7 min', level: 'Principiante', cat: 'productividad',
+    cover: 'https://picsum.photos/seed/clients99/900/320',
     body: `
       <p>Como consultora independiente manejo relaciones con mas de 40 clientes. Sin equipo y sin presupuesto para un CRM caro, estaba perdiendo seguimientos, olvidando fechas clave y tardando demasiado en redactar emails de propuesta.</p>
       <p>La solucion fue armar un sistema simple de prompts que uso junto con una hoja de calculo. No es perfecto, pero resolvio el 80% de mi problema en un dia.</p>
+      <figure class="art-img"><img src="https://picsum.photos/seed/crm121/700/200" loading="lazy"><figcaption>Una hoja de calculo simple con las columnas correctas, combinada con prompts especificos, puede reemplazar un CRM de cientos de dolares al mes.</figcaption></figure>
       <h3>El sistema en 3 piezas</h3>
       <div class="step-row"><div class="step-n">1</div><div class="step-text"><strong>Registro de interaccion rapida</strong>Despues de cada llamada o reunion, escribi un resumen rapido y usa este prompt:</div></div>
       <div class="code-box">Acabo de hablar con [nombre del cliente de la empresa X].
@@ -582,6 +621,7 @@ Ayudame a:
 - Identificar cuales necesitan contacto urgente (sin actividad > 2 semanas)
 - Priorizar mi semana segun oportunidad y riesgo de perder el cliente
 - Sugerir el mensaje adecuado para cada uno segun el contexto</div>
+      <figure class="art-img"><img src="https://picsum.photos/seed/email132/700/200" loading="lazy"><figcaption>Los emails de seguimiento personalizados mejoran la tasa de respuesta. Con el prompt correcto, redactar uno lleva menos de 30 segundos.</figcaption></figure>
       <div class="tip-box"><strong>Como organizo la info:</strong> Tengo una hoja de Google Sheets simple con columnas: Cliente | Contacto | Ultimo contacto | Estado | Proxima accion. Cada semana la pego en el chat y el prompt hace el resto.</div>
       <p>Desde que implemente esto, no perdi ningun seguimiento importante y el tiempo que dedico a redactar emails se redujo a la mitad.</p>
     `
@@ -621,6 +661,7 @@ function openArticle(id) {
       <div class="ap-date">${art.readTime} lectura · ${art.level}</div>
     </div>
     <hr class="divider">
+    <div class="ap-cover"><img src="${art.cover}" alt="${art.title}" loading="lazy"></div>
     <div class="ap-body">${art.body}</div>
   `;
 
