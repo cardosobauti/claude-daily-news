@@ -191,6 +191,56 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
 .empty-state { padding:40px 20px; text-align:center; color:var(--text2); }
 .empty-state strong { display:block; color:var(--bright); font-size:15px; margin-bottom:8px; font-family:'Playfair Display',serif; }
 
+/* GUIA PAGE */
+#page-guia { display:none; overflow-y:auto; max-height:calc(100vh - 52px); }
+.guia-hero { background:linear-gradient(135deg, #fff5f5 0%, #fff 65%); border-bottom:1px solid var(--border); padding:40px 40px 32px; }
+.guia-hero-eyebrow { font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; }
+.guia-hero-title { font-family:'Playfair Display',serif; font-size:36px; font-weight:800; color:var(--bright); line-height:1.15; margin-bottom:14px; }
+.guia-hero-sub { font-size:15px; color:var(--text); line-height:1.75; max-width:620px; margin-bottom:20px; }
+.guia-hero-badge { display:inline-flex; align-items:center; gap:7px; background:var(--tag-bg); border:1px solid rgba(204,0,0,.2); padding:6px 14px; border-radius:2px; font-size:12px; font-weight:700; color:var(--accent); }
+.guia-section { padding:28px 40px; border-bottom:1px solid var(--border); }
+.guia-section-label { font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-bottom:14px; padding-bottom:8px; border-bottom:2px solid var(--accent); display:inline-block; }
+.guia-section-heading { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--bright); margin-bottom:8px; }
+.guia-section-text { font-size:14px; color:var(--text); line-height:1.75; margin-bottom:16px; }
+.platform-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:12px; margin-top:16px; }
+.platform-card { border:1px solid var(--border); padding:18px 14px 14px; text-align:center; cursor:pointer; transition:all .15s; background:#fff; text-decoration:none; display:block; }
+.platform-card:hover { border-color:var(--accent); box-shadow:0 3px 12px rgba(204,0,0,.1); transform:translateY(-2px); }
+.platform-icon { font-size:30px; margin-bottom:9px; }
+.platform-name { font-size:13px; font-weight:700; color:var(--bright); margin-bottom:3px; }
+.platform-desc { font-size:11px; color:var(--text2); line-height:1.4; }
+.use-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:16px; }
+@media(max-width:700px){.use-grid{grid-template-columns:1fr;} .platform-grid{grid-template-columns:1fr 1fr;} .guia-section{padding:24px 20px;} .guia-hero{padding:28px 20px 24px;} .newsletter-section{padding:24px 20px;} .newsletter-box{padding:24px 20px;} .tips-grid{grid-template-columns:1fr;}}
+.use-card { background:var(--bg2); border:1px solid var(--border); padding:20px 16px; }
+.use-card-icon { font-size:26px; margin-bottom:10px; }
+.use-card-title { font-size:14px; font-weight:700; color:var(--bright); margin-bottom:10px; }
+.use-card-list { list-style:none; }
+.use-card-list li { font-size:12px; color:var(--text); padding:5px 0; border-bottom:1px solid var(--border); line-height:1.5; }
+.use-card-list li:last-child { border:none; }
+.use-card-list li::before { content:'\2192  '; color:var(--accent); font-weight:700; }
+.tips-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+.tip-card { background:#fff; border:1px solid var(--border); border-left:3px solid var(--accent); padding:14px 16px; }
+.tip-card-num { font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.5px; margin-bottom:5px; }
+.tip-card-title { font-size:13px; font-weight:700; color:var(--bright); margin-bottom:5px; }
+.tip-card-text { font-size:12px; color:var(--text); line-height:1.65; }
+/* NEWSLETTER */
+.newsletter-section { padding:32px 40px; background:linear-gradient(135deg, #fff5f5 0%, #fff 100%); }
+.newsletter-box { background:#fff; border:1px solid var(--border); border-top:3px solid var(--accent); padding:32px 36px; max-width:560px; }
+.newsletter-title { font-family:'Playfair Display',serif; font-size:24px; font-weight:700; color:var(--bright); margin-bottom:8px; }
+.newsletter-sub { font-size:14px; color:var(--text); line-height:1.7; margin-bottom:24px; }
+.nl-label { font-size:11px; font-weight:700; color:var(--bright); text-transform:uppercase; letter-spacing:.5px; margin-bottom:7px; display:block; }
+.nl-input { width:100%; padding:10px 12px; border:1px solid var(--border2); font-size:14px; color:var(--bright); background:#fff; border-radius:2px; outline:none; font-family:inherit; transition:border-color .15s; margin-bottom:20px; }
+.nl-input:focus { border-color:var(--accent); box-shadow:0 0 0 2px rgba(204,0,0,.08); }
+.nl-radios { display:flex; gap:16px; margin-bottom:24px; flex-wrap:wrap; }
+.nl-radio-opt { display:flex; align-items:center; gap:8px; cursor:pointer; }
+.nl-radio-opt input[type=radio] { accent-color:var(--accent); width:16px; height:16px; cursor:pointer; }
+.nl-radio-opt span { font-size:13px; color:var(--text); font-weight:500; }
+.nl-btn { background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:11px 28px; border:none; border-radius:2px; cursor:pointer; text-transform:uppercase; letter-spacing:.5px; transition:background .15s; }
+.nl-btn:hover { background:var(--accent2); }
+.nl-btn:disabled { background:#ccc; cursor:not-allowed; }
+.nl-success { display:none; background:#f0fff4; border:1px solid #68d391; border-radius:2px; color:#276749; font-size:14px; font-weight:600; padding:16px 18px; margin-top:16px; }
+.nl-error-msg { display:none; background:#fff5f5; border:1px solid #fc8181; border-radius:2px; color:#c53030; font-size:13px; padding:12px 14px; margin-top:12px; }
+.nl-privacy { font-size:11px; color:var(--text2); margin-top:12px; line-height:1.5; }
+
 </style>
 </head>
 <body>
@@ -206,6 +256,7 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
       <button class="nav-btn" onclick="setFilter('desarrollo',this)">Desarrollo</button>
       <button class="nav-btn" onclick="setFilter('escritura',this)">Escritura</button>
       <button class="nav-btn" onclick="setFilter('legal',this)">Legal</button>
+      <button class="nav-btn" onclick="showGuia(this)">&#128218; Gu&iacute;a Claude</button>
     </nav>
   </div>
   <div class="topbar-right">
@@ -248,6 +299,164 @@ body { font-family:'Inter',-apple-system,sans-serif; background:var(--bg); color
       <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
       <div class="article-page-inner" id="articleContent"></div>
     </div>
+
+    <!-- GUIA CLAUDE PAGE -->
+    <div id="page-guia">
+
+      <!-- HERO -->
+      <div class="guia-hero">
+        <div class="guia-hero-eyebrow">Gu&iacute;a para principiantes</div>
+        <div class="guia-hero-title">&iquest;Qu&eacute; es Claude?</div>
+        <div class="guia-hero-sub">Claude es una inteligencia artificial creada por Anthropic dise&ntilde;ada para ayudarte con casi cualquier tarea: redactar, analizar, programar, responder preguntas y mucho m&aacute;s. Es como tener un asistente brillante disponible las 24 horas, al que le pod&eacute;s hablar en lenguaje natural, igual que en una conversaci&oacute;n.</div>
+        <div class="guia-hero-badge">&#9889; 100% gratis para empezar &nbsp;&bull;&nbsp; Sin instalaci&oacute;n requerida &nbsp;&bull;&nbsp; En espa&ntilde;ol</div>
+      </div>
+
+      <!-- DONDE USAR -->
+      <div class="guia-section">
+        <div class="guia-section-label">D&oacute;nde usarlo</div>
+        <div class="guia-section-heading">&iquest;C&oacute;mo accedo a Claude?</div>
+        <div class="guia-section-text">Pod&eacute;s usar Claude desde cualquier dispositivo. La forma m&aacute;s r&aacute;pida es desde el navegador en <strong>claude.ai</strong>, sin instalar nada. Tambi&eacute;n est&aacute; disponible como app para el celular y como aplicaci&oacute;n de escritorio.</div>
+        <div class="platform-grid">
+          <a class="platform-card" href="https://claude.ai" target="_blank">
+            <div class="platform-icon">&#127760;</div>
+            <div class="platform-name">Web</div>
+            <div class="platform-desc">claude.ai desde cualquier navegador</div>
+          </a>
+          <a class="platform-card" href="https://apps.apple.com/app/claude-by-anthropic/id6473753684" target="_blank">
+            <div class="platform-icon">&#63743;</div>
+            <div class="platform-name">iPhone &amp; iPad</div>
+            <div class="platform-desc">App gratuita en el App Store</div>
+          </a>
+          <a class="platform-card" href="https://play.google.com/store/apps/details?id=com.anthropic.claude" target="_blank">
+            <div class="platform-icon">&#129303;</div>
+            <div class="platform-name">Android</div>
+            <div class="platform-desc">App gratuita en Google Play</div>
+          </a>
+          <a class="platform-card" href="https://claude.ai/download" target="_blank">
+            <div class="platform-icon">&#128187;</div>
+            <div class="platform-name">Mac &amp; Windows</div>
+            <div class="platform-desc">App de escritorio para mayor comodidad</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- PARA QUE SIRVE -->
+      <div class="guia-section">
+        <div class="guia-section-label">&iquest;Para qu&eacute; sirve?</div>
+        <div class="guia-section-heading">Casos de uso por &aacute;rea</div>
+        <div class="guia-section-text">Claude puede ayudarte tanto en el trabajo como en la vida personal. No hace falta ser t&eacute;cnico ni saber programar. Basta con escribirle lo que neces&iacute;s, como si le enviaras un mensaje a un colega muy capaz.</div>
+        <div class="use-grid">
+          <div class="use-card">
+            <div class="use-card-icon">&#128188;</div>
+            <div class="use-card-title">Trabajo</div>
+            <ul class="use-card-list">
+              <li>Redactar y mejorar emails</li>
+              <li>Resumir documentos largos</li>
+              <li>Preparar presentaciones</li>
+              <li>Analizar datos en Excel</li>
+              <li>Revisar contratos</li>
+              <li>Armar informes ejecutivos</li>
+            </ul>
+          </div>
+          <div class="use-card">
+            <div class="use-card-icon">&#127968;</div>
+            <div class="use-card-title">Vida Personal</div>
+            <ul class="use-card-list">
+              <li>Planificar viajes</li>
+              <li>Entender recibos y facturas</li>
+              <li>Aprender temas nuevos</li>
+              <li>Redactar mensajes dif&iacute;ciles</li>
+              <li>Comparar productos antes de comprar</li>
+              <li>Ideas para recetas o regalos</li>
+            </ul>
+          </div>
+          <div class="use-card">
+            <div class="use-card-icon">&#127979;</div>
+            <div class="use-card-title">Aprender &amp; Crear</div>
+            <ul class="use-card-list">
+              <li>Explicaciones simples de temas complejos</li>
+              <li>Practicar idiomas</li>
+              <li>Escribir con asistencia</li>
+              <li>Estudiar para ex&aacute;menes</li>
+              <li>Generar c&oacute;digo sin saber programar</li>
+              <li>Brainstorming de ideas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRIMEROS PASOS -->
+      <div class="guia-section">
+        <div class="guia-section-label">Tips para empezar</div>
+        <div class="guia-section-heading">5 claves para sacarle el m&aacute;ximo desde el primer d&iacute;a</div>
+        <div class="guia-section-text">La diferencia entre un resultado mediocre y uno excelente est&aacute; en c&oacute;mo escribes el pedido. Estas claves te ahorrar&aacute;n semanas de prueba y error.</div>
+        <div class="tips-grid">
+          <div class="tip-card">
+            <div class="tip-card-num">Tip 1</div>
+            <div class="tip-card-title">S&eacute; espec&iacute;fico con el contexto</div>
+            <div class="tip-card-text">En lugar de "resumime esto", prov&eacute; contexto: "Soy contador, resumime este contrato de 10 p&aacute;ginas en 3 puntos clave para presentar al directorio." Cuanto m&aacute;s contexto das, mejor es el resultado.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-card-num">Tip 2</div>
+            <div class="tip-card-title">Ped&iacute; un formato espec&iacute;fico</div>
+            <div class="tip-card-text">Claude puede responder en listas, tablas, parrafos, bullets o el formato que necesit&eacute;s. Solo dec&iacute;le: "respond&eacute; en formato tabla" o "en menos de 150 palabras" y lo va a respetar.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-card-num">Tip 3</div>
+            <div class="tip-card-title">La conversaci&oacute;n es iterativa</div>
+            <div class="tip-card-text">No ten&eacute;s que hacer el prompt perfecto la primera vez. Empez&aacute; con algo simple y agreg&aacute;: "Ahora hac&eacute;lo m&aacute;s formal" o "Agreg&aacute; un p&aacute;rrafo sobre X". Claude recuerda toda la conversaci&oacute;n.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-card-num">Tip 4</div>
+            <div class="tip-card-title">Adjunt&aacute; archivos para mejor ayuda</div>
+            <div class="tip-card-text">Pod&eacute;s subir PDFs, im&aacute;genes, Excel y documentos Word. Si ten&eacute;s un contrato para revisar o un Excel para analizar, arrastr&aacute;lo directo al chat y ped&iacute; lo que necesit&aacute;s.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-card-num">Tip 5</div>
+            <div class="tip-card-title">Us&aacute; roles para respuestas m&aacute;s precisas</div>
+            <div class="tip-card-text">Empez&aacute; el prompt con "Act&uacute;a como [rol]": "Act&uacute;a como abogado corporativo y..." o "Act&uacute;a como analista financiero y...". Esto ajusta el tono y la profundidad de la respuesta al nivel que necesit&aacute;s.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-card-num">Tip 6</div>
+            <div class="tip-card-title">No es un buscador, es un asistente</div>
+            <div class="tip-card-text">Claude no navega la web por defecto, pero sabe una enorme cantidad de cosas hasta su fecha de entrenamiento. Para informaci&oacute;n muy reciente o espec&iacute;fica, usalo para analizar datos que vos le proveés directamente.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEWSLETTER -->
+      <div class="newsletter-section" id="newsletter-anchor">
+        <div class="newsletter-box">
+          <div class="newsletter-title">Newsletter Claude Daily</div>
+          <div class="newsletter-sub">Recib&iacute; los mejores tutoriales y casos de uso de Claude directamente en tu email. Una vez por semana, sin spam. Totalmente gratis.</div>
+          <form id="nl-form" onsubmit="submitNewsletter(event)">
+            <label class="nl-label" for="nl-email">Tu email</label>
+            <input class="nl-input" type="email" id="nl-email" placeholder="tu@email.com" required autocomplete="email">
+            <label class="nl-label">Me interesa Claude para:</label>
+            <div class="nl-radios">
+              <label class="nl-radio-opt">
+                <input type="radio" name="nl-tipo" value="Trabajo">
+                <span>&#128188; Trabajo</span>
+              </label>
+              <label class="nl-radio-opt">
+                <input type="radio" name="nl-tipo" value="Vida Personal">
+                <span>&#127968; Vida Personal</span>
+              </label>
+              <label class="nl-radio-opt">
+                <input type="radio" name="nl-tipo" value="Ambas" checked>
+                <span>&#9889; Ambas</span>
+              </label>
+            </div>
+            <button class="nl-btn" type="submit" id="nl-submit">Suscribirme gratis</button>
+            <div class="nl-privacy">&#128274; Tu email no se comparte con nadie. Pod&eacute;s darte de baja cuando quieras.</div>
+          </form>
+          <div class="nl-success" id="nl-success">&#10003; &iexcl;Listo! Te sum&aacute;ste al newsletter de Claude Daily. Pronto recibir&aacute;s el primer tutorial en tu email.</div>
+          <div class="nl-error-msg" id="nl-error-msg"></div>
+        </div>
+      </div>
+
+    </div><!-- /#page-guia -->
+
   </main>
 
   <!-- SIDEBAR DER -->
@@ -809,8 +1018,63 @@ function updateProgress() {
 function goHome() {
   document.getElementById('page-home').style.display = 'block';
   document.getElementById('page-article').style.display = 'none';
+  document.getElementById('page-guia').style.display = 'none';
   document.getElementById('backBtn').classList.remove('visible');
   document.getElementById('relatedWidget').style.display = 'none';
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.nav-btn').classList.add('active');
+}
+
+function showGuia(btn) {
+  document.getElementById('page-home').style.display = 'none';
+  document.getElementById('page-article').style.display = 'none';
+  document.getElementById('page-guia').style.display = 'block';
+  document.getElementById('backBtn').classList.remove('visible');
+  document.getElementById('relatedWidget').style.display = 'none';
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('page-guia').scrollTop = 0;
+}
+
+// ── NEWSLETTER ─────────────────────────────────────────────────────────
+const NEWSLETTER_ENDPOINT = '';  // Pegar aqui la URL del Google Apps Script Web App
+
+async function submitNewsletter(e) {
+  e.preventDefault();
+  const email = document.getElementById('nl-email').value.trim();
+  const tipoEl = document.querySelector('input[name="nl-tipo"]:checked');
+  const btn = document.getElementById('nl-submit');
+  const successEl = document.getElementById('nl-success');
+  const errorEl = document.getElementById('nl-error-msg');
+  if (!email || !tipoEl) {
+    errorEl.textContent = 'Por favor complet\u00e1 tu email y selecci\u00f3n.';
+    errorEl.style.display = 'block';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  errorEl.style.display = 'none';
+  if (!NEWSLETTER_ENDPOINT) {
+    setTimeout(() => {
+      document.getElementById('nl-form').style.display = 'none';
+      successEl.style.display = 'block';
+    }, 500);
+    return;
+  }
+  try {
+    await fetch(NEWSLETTER_ENDPOINT, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, tipo: tipoEl.value, fecha: new Date().toISOString() })
+    });
+    document.getElementById('nl-form').style.display = 'none';
+    successEl.style.display = 'block';
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Suscribirme gratis';
+    errorEl.textContent = 'Hubo un error. Intent\u00e1 de nuevo en un momento.';
+    errorEl.style.display = 'block';
+  }
 }
 
 // ── REDDIT FEED ────────────────────────────────────────────────────────
